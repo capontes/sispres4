@@ -1,4 +1,4 @@
-export class RazonSocial {
+export class LoanRazonSocial {
   value: string;
 
   constructor(value: string) {

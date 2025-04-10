@@ -2,7 +2,7 @@ import { Loan } from "./Loan";
 import { LoanCodEmpresa } from "./LoanCodEmpresa";
 import { LoanCodPrestamo } from "./LoanCodPrestamo";
 
-export interface LoanReporitory {
+export interface LoanRepository {
   getAll(codEmpresa: LoanCodEmpresa): Promise<Loan[]>;
   getById(
     codEmpresa: LoanCodEmpresa,

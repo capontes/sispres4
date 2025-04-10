@@ -11,7 +11,7 @@ import { LoanGastosAdministrativos } from "./LoanGastosAdministrativos";
 import { LoanNroCuotas } from "./LoanNroCuotas";
 import { LoanNroDoc } from "./LoanNroDoc";
 import { LoanObservaciones } from "./LoanObservaciones";
-import { RazonSocial } from "./LoanRazonSocial";
+import { LoanRazonSocial } from "./LoanRazonSocial";
 import { LoanSaldoCapital } from "./LoanSaldoCapital";
 import { LoanSeguro } from "./LoanSeguro";
 import { LoanTasaInteres } from "./LoanTasaInteres";
@@ -21,7 +21,7 @@ export class Loan {
   codEmpresa: LoanCodEmpresa;
   codPrestamo: LoanCodPrestamo;
   nroDoc: LoanNroDoc;
-  razonSocial: RazonSocial;
+  razonSocial: LoanRazonSocial;
   garante: LoanGarante;
   tasaInteres: LoanTasaInteres;
   capital: LoanCapital;
@@ -35,13 +35,13 @@ export class Loan {
   observaciones: LoanObservaciones;
   usuario: LoanUsuario;
   fecCrea: LoanFecCrea;
-  cuotas: [LoanCuotas];
+  cuotas: LoanCuotas[];
 
   constructor(
     codEmpresa: LoanCodEmpresa,
     codPrestamo: LoanCodPrestamo,
     nroDoc: LoanNroDoc,
-    razonSocial: RazonSocial,
+    razonSocial: LoanRazonSocial,
     garante: LoanGarante,
     tasaInteres: LoanTasaInteres,
     capital: LoanCapital,
@@ -55,7 +55,7 @@ export class Loan {
     observaciones: LoanObservaciones,
     usuario: LoanUsuario,
     fecCrea: LoanFecCrea,
-    cuotas: [LoanCuotas]
+    cuotas: LoanCuotas[] = []
   ) {
     this.codEmpresa = codEmpresa;
     this.codPrestamo = codPrestamo;
