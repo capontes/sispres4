@@ -1,23 +1,23 @@
-export class Pago {
+export class Pay {
   codEmpresa: string;
-  codPrestamo: string;
+  codPrestamo: number;
   nroCuota: string;
   nroCuotas: string;
   nroDoc: string;
   razonSocial: string;
   garante: string;
-  monto: Number;
+  monto: number;
   fecVencimiento: string;
   fecPago: string;
-  diasRetraso: Number;
-  capital: string;
-  seguro: string;
-  interes: string;
-  tasaMora: Number;
-  mora: Number;
-  totalPagar: Number;
-  importe: Number;
-  saldoCapital: Number;
+  diasRetraso: number;
+  capital: number;
+  seguro: number;
+  interes: number;
+  tasaMora: number;
+  mora: number;
+  totalPagar: number;
+  importe: number;
+  saldoCapital: number;
   tipoPago: string;
   observaciones: string;
   usuario: string;
@@ -25,24 +25,24 @@ export class Pago {
 
   constructor(
     codEmpresa: string,
-    codPrestamo: string,
+    codPrestamo: number,
     nroCuota: string,
     nroCuotas: string,
     nroDoc: string,
     razonSocial: string,
     garante: string,
-    monto: Number,
+    monto: number,
     fecVencimiento: string,
     fecPago: string,
-    diasRetraso: Number,
-    capital: string,
-    seguro: string,
-    interes: string,
-    tasaMora: Number,
-    mora: Number,
-    totalPagar: Number,
-    importe: Number,
-    saldoCapital: Number,
+    diasRetraso: number,
+    capital: number,
+    seguro: number,
+    interes: number,
+    tasaMora: number,
+    mora: number,
+    totalPagar: number,
+    importe: number,
+    saldoCapital: number,
     tipoPago: string,
     observaciones: string,
     usuario: string,
