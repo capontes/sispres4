@@ -1,4 +1,4 @@
-export class LoadCodEmpresa {
+export class LoanCodEmpresa {
   value: string;
 
   constructor(value: string) {

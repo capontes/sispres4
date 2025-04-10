@@ -1,5 +1,5 @@
 import { LoanCapital } from "./LoanCapital";
-import { LoadCodEmpresa } from "./LoanCodEmpresa";
+import { LoanCodEmpresa } from "./LoanCodEmpresa";
 import { LoanCodPrestamo } from "./LoanCodPrestamo";
 import { LoanCuotas } from "./LoanCuotas";
 import { LoanEstado } from "./LoanEstado";
@@ -17,8 +17,8 @@ import { LoanSeguro } from "./LoanSeguro";
 import { LoanTasaInteres } from "./LoanTasaInteres";
 import { LoanUsuario } from "./LoanUsuario";
 
-export class Prestamo {
-  codEmpresa: LoadCodEmpresa;
+export class Loan {
+  codEmpresa: LoanCodEmpresa;
   codPrestamo: LoanCodPrestamo;
   nroDoc: LoanNroDoc;
   razonSocial: RazonSocial;
@@ -38,7 +38,7 @@ export class Prestamo {
   cuotas: [LoanCuotas];
 
   constructor(
-    codEmpresa: LoadCodEmpresa,
+    codEmpresa: LoanCodEmpresa,
     codPrestamo: LoanCodPrestamo,
     nroDoc: LoanNroDoc,
     razonSocial: RazonSocial,
