@@ -5,9 +5,17 @@ import { LoanGetAll } from "../../Loan/application/LoanGetAll/LoanGetAll";
 import { LoanGetById } from "../../Loan/application/LoanGetById/LoanGetById";
 import { LoanUpdate } from "../../Loan/application/LoanUpdate/TaskUpdate";
 import { FirebaseLoanRepository } from "../../Loan/infrastucture/FirebaseLoanReporsitory";
+import { InMemoryPayRepository } from "src/lib/Pay/infrastructure/InMemoryPayRepository";
+import { PayGetAll } from "src/lib/Pay/application/PayGetAll/PayGetAll";
+import { PayCreate } from "src/lib/Pay/application/PayCreate/PayCreate";
+import { PayUpdate } from "src/lib/Pay/application/PayUpdate/PayUpdate";
+import { PayDelete } from "src/lib/Pay/application/PayDelete/PayDelete";
+import { PayGetById } from "src/lib/Pay/application/PayGetByld/PayGetByld";
 
-// const loanRepository = new FirebaseLoanRepository();
-const loanRepository = new InMemoryLoanRepository();
+const loanRepository = new FirebaseLoanRepository();
+//const loanRepository = new InMemoryLoanRepository();
+//  const payRepository = new InMemoryPayRepository();
+ const payRepository = new Fire
 
 export const ServiceContainer = {
   loan: {
@@ -16,5 +24,12 @@ export const ServiceContainer = {
     create: new LoanCreate(loanRepository),
     update: new LoanUpdate(loanRepository),
     delete: new LoanDelete(loanRepository),
+  },
+  pay: {
+    getAll: new PayGetAll(payRepository),
+    getById: new PayGetById(payRepository),
+    create: new PayCreate(payRepository),
+    update: new PayUpdate(payRepository),
+    delete: new PayDelete(payRepository),
   },
 };

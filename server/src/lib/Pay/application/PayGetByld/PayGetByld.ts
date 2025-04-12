@@ -3,7 +3,7 @@ import { PayCodEmpresa } from "../../domain/PayCodEmpresa";
 import { PayCodPrestamo } from "../../domain/PayCodPrestamo"; // Adjusted the path and corrected the typo in 'PayCodPrestamop'
 import { PayRepository } from "../../domain/PayRepository"; // Ensure this file exists and the path is correct
 
-export class PayGetByld {
+export class PayGetById {
   constructor(private payRepository: PayRepository) {}
   async run(codEmpresa: string, codPrestamo: number): Promise<Pay | null> {
     const payCodPrestamo = new PayCodPrestamo(codPrestamo);
