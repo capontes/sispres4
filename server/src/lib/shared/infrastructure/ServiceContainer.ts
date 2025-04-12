@@ -6,17 +6,17 @@ import { LoanGetById } from "../../Loan/application/LoanGetById/LoanGetById";
 import { LoanUpdate } from "../../Loan/application/LoanUpdate/TaskUpdate";
 import { FirebaseLoanRepository } from "../../Loan/infrastucture/FirebaseLoanReporsitory";
 import { InMemoryPayRepository } from "src/lib/Pay/infrastructure/InMemoryPayRepository";
-import { PayGetAll } from "src/lib/Pay/application/PayGetAll/PayGetAll";
-import { PayCreate } from "src/lib/Pay/application/PayCreate/PayCreate";
-import { PayUpdate } from "src/lib/Pay/application/PayUpdate/PayUpdate";
-import { PayDelete } from "src/lib/Pay/application/PayDelete/PayDelete";
-import { PayGetById } from "src/lib/Pay/application/PayGetByld/PayGetByld";
-import { FirebasePayRepository } from "src/lib/Pay/infrastructure/FirebasePayRepository";
+import { PayGetAll } from "../../Pay/application/PayGetAll/PayGetAll";
+import { PayCreate } from "../../Pay/application/PayCreate/PayCreate";
+import { PayUpdate } from "../../Pay/application/PayUpdate/PayUpdate";
+import { PayDelete } from "../../Pay/application/PayDelete/PayDelete";
+import { PayGetById } from "../../Pay/application/PayGetByld/PayGetByld";
+import { FirebasePayRepository } from "../../Pay/infrastructure/FirebasePayRepository";
 
 const loanRepository = new FirebaseLoanRepository();
 //const loanRepository = new InMemoryLoanRepository();
 //  const payRepository = new InMemoryPayRepository();
- const payRepository = new FirebasePayRepository
+const payRepository = new FirebasePayRepository();
 
 export const ServiceContainer = {
   loan: {

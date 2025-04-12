@@ -5,7 +5,7 @@ const controller = new ExpressPayController();
 
 const ExpressPayRouter = Router();
 
-ExpressPayRouter.get("/pays/", controller.getAll);
+ExpressPayRouter.get("/pays/:codEmpresa", controller.getAll);
 ExpressPayRouter.get("/pays/:id/", controller.getById);
 ExpressPayRouter.post("/pays/", controller.create);
 ExpressPayRouter.put("/pays/", controller.update);

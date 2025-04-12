@@ -28,7 +28,7 @@ export class PayUpdate {
   constructor(private payRepository: PayRepository) {}
   async run(
     codEmpresa: string,
-    codPrestamo: string,
+    codPrestamo: number,
     nroCuota: number,
     nroCuotas: number,
     nroDoc: string,
@@ -48,7 +48,8 @@ export class PayUpdate {
     saldoCapital: number,
     tipoPago: string,
     observaciones: string,
-    usuario: string
+    usuario: string,
+    fecCrea: Date
   ): Promise<void> {
     const pay = new Pay(
       new PayCodEmpresa(codEmpresa),
