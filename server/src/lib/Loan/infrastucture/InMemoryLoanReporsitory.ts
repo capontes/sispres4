@@ -3,6 +3,7 @@ import { LoanCodEmpresa } from "../domain/LoanCodEmpresa";
 import { LoanCodPrestamo } from "../domain/LoanCodPrestamo";
 import { LoanRepository } from "../domain/LoanRepository";
 
+//update 12-04-25
 export class InMemoryLoanRepository implements LoanRepository {
   private loans: Loan[] = [];
 
@@ -10,8 +11,11 @@ export class InMemoryLoanRepository implements LoanRepository {
     this.loans.push(task);
   }
 
-  async getAll(): Promise<Loan[]> {
-    return this.loans;
+  async getAll(codEmpresa: LoanCodEmpresa): Promise<Loan[]> {
+    const loan = this.loans.filter(
+      (l) => l.codEmpresa.value == codEmpresa.value
+    );
+    return loan;
   }
 
   async getById(
