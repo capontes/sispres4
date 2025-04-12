@@ -1,4 +1,4 @@
-export class PayFecVencimiento {
+export class PayFecPago {
   value: Date;
 
   constructor(value: Date) {

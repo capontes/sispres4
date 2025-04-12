@@ -6,6 +6,7 @@ export class PayCapital {
     this.ensureIsValid();
   }
   ensureIsValid() {
-    if (this.capital < 0) throw new Error("Capital no puede ser menor a cero");
+    if (this.capital < 0)
+      throw new Error("El Capital no puede ser menor a cero");
   }
 }

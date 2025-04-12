@@ -1,52 +1,76 @@
+import { PayCapital } from "./PayCapital";
+import { PayCodEmpresa } from "./PayCodEmpresa";
+import { PayCodPrestamo } from "./PayCodPrestamo";
+import { PayDiasRetraso } from "./PayDiasRetraso";
+import { PayFecCrea } from "./PayFecCrea";
+import { PayFecPago } from "./PayFecPago";
+import { PayFecVencimiento } from "./PayFecVencimiento";
+import { PayGarante } from "./PayGarante";
+import { PayImporte } from "./PayImporte";
+import { PayInteres } from "./PayInteres";
+import { PayMonto } from "./PayMonto";
+import { PayMora } from "./PayMora";
+import { PayNroCuota } from "./PayNroCuota";
+import { PayNroCuotas } from "./PayNroCuotas";
+import { PayNroDoc } from "./PayNroDoc";
+import { PayObservaciones } from "./PayObservaciones";
+import { PayRazonSocial } from "./PayRazonSocial";
+import { PaySaldoCapital } from "./PaySaldoCapital";
+import { PaySeguro } from "./PaySeguro";
+import { PayTasaMora } from "./PayTasaMora";
+import { PayTipoPago } from "./PayTipoPago";
+import { PayTotalPagar } from "./PayTotalPagar";
+import { PayUsuario } from "./PayUsuario";
+
 export class Pay {
-  codEmpresa: string;
-  codPrestamo: number;
-  nroCuota: string;
-  nroCuotas: string;
-  nroDoc: string;
-  razonSocial: string;
-  garante: string;
-  monto: number;
-  fecVencimiento: string;
-  fecPago: string;
-  diasRetraso: number;
-  capital: number;
-  seguro: number;
-  interes: number;
-  tasaMora: number;
-  mora: number;
-  totalPagar: number;
-  importe: number;
-  saldoCapital: number;
-  tipoPago: string;
-  observaciones: string;
-  usuario: string;
+  codEmpresa: PayCodEmpresa;
+  codPrestamo: PayCodPrestamo;
+  nroCuota: PayNroCuota;
+  nroCuotas: PayNroCuotas;
+  nroDoc: PayNroDoc;
+  razonSocial: PayRazonSocial;
+  garante: PayGarante;
+  monto: PayMonto;
+  fecVencimiento: PayFecVencimiento;
+  fecPago: PayFecPago;
+  diasRetraso: PayDiasRetraso;
+  capital: PayCapital;
+  seguro: PaySeguro;
+  interes: PayInteres;
+  tasaMora: PayTasaMora;
+  mora: PayMora;
+  totalPagar: PayTotalPagar;
+  importe: PayImporte;
+  saldoCapital: PaySaldoCapital;
+  tipoPago: PayTipoPago;
+  observaciones: PayObservaciones;
+  usuario: PayUsuario;
   fecCrea: Date;
 
   constructor(
-    codEmpresa: string,
-    codPrestamo: number,
-    nroCuota: string,
-    nroCuotas: string,
-    nroDoc: string,
-    razonSocial: string,
-    garante: string,
-    monto: number,
-    fecVencimiento: string,
-    fecPago: string,
-    diasRetraso: number,
-    capital: number,
-    seguro: number,
-    interes: number,
-    tasaMora: number,
-    mora: number,
-    totalPagar: number,
-    importe: number,
-    saldoCapital: number,
-    tipoPago: string,
-    observaciones: string,
-    usuario: string,
-    fecCrea: Date
+    codEmpresa: PayCodEmpresa,
+    codPrestamo: PayCodPrestamo,
+    nroCuota: PayNroCuota,
+    nroCuotas: PayNroCuotas,
+    nroDoc: PayNroDoc,
+    razonSocial: PayRazonSocial,
+    garante: PayGarante,
+    monto: PayMonto,
+    fecVencimiento: PayFecVencimiento,
+    fecPago: PayFecPago,
+    diasRetraso: PayDiasRetraso,
+    capital: PayCapital,
+    seguro: PaySeguro,
+    interes: PayInteres,
+    tasaMora: PayTasaMora,
+    mora: PayMora,
+    totalPagar: PayTotalPagar,
+    importe: PayImporte,
+    saldoCapital: PaySaldoCapital,
+    tipoPago: PayTipoPago,
+    observaciones: PayObservaciones,
+    usuario: PayUsuario,
+    fecCrea: PayFecCrea
   ) {
     this.codEmpresa = codEmpresa;
     this.codPrestamo = codPrestamo;
@@ -70,7 +94,7 @@ export class Pay {
     this.tipoPago = tipoPago;
     this.observaciones = observaciones;
     this.usuario = usuario;
-    this.fecCrea = new Date(fecCrea);
+    this.fecCrea = new Date();
   }
 
   public mapToPrimitives() {
