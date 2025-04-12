@@ -11,11 +11,12 @@ import { PayCreate } from "src/lib/Pay/application/PayCreate/PayCreate";
 import { PayUpdate } from "src/lib/Pay/application/PayUpdate/PayUpdate";
 import { PayDelete } from "src/lib/Pay/application/PayDelete/PayDelete";
 import { PayGetById } from "src/lib/Pay/application/PayGetByld/PayGetByld";
+import { FirebasePayRepository } from "src/lib/Pay/infrastructure/FirebasePayRepository";
 
 const loanRepository = new FirebaseLoanRepository();
 //const loanRepository = new InMemoryLoanRepository();
 //  const payRepository = new InMemoryPayRepository();
- const payRepository = new Fire
+ const payRepository = new FirebasePayRepository
 
 export const ServiceContainer = {
   loan: {
