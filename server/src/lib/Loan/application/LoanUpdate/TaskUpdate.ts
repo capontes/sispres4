@@ -95,7 +95,6 @@ export class LoanUpdate {
       loanCodPrestamo
     );
     if (!loanExist) throw new Error("Préstamo not found");
-
     return await this.loanRepository.update(loan);
   }
 }
