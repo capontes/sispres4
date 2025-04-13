@@ -9,7 +9,7 @@ export class ExpressLoanController {
       const loans = await ServiceContainer.loan.getAll.run(
         req.params.codEmpresa
       );
-      res.json(loans.map((loan) => loan.mapToPrimitives())).status(200);
+      return res.json(loans.map((loan) => loan.mapToPrimitives())).status(200);
     } catch (error) {
       next(error);
     }
@@ -21,10 +21,10 @@ export class ExpressLoanController {
         req.params.codEmpresa,
         Number(req.params.codPrestamo)
       );
-      res.json(loan?.mapToPrimitives()).status(200);
+      return res.json(loan?.mapToPrimitives()).status(200);
     } catch (error) {
       if (error instanceof LoanNotFoundError) {
-        res.status(404).json({ message: error.message });
+        return res.status(404).json({ message: error.message });
       }
       next(error);
     }
@@ -115,7 +115,7 @@ export class ExpressLoanController {
           aCapital: c.aCapital,
         }))
       );
-      res.status(201).send();
+      return res.status(201).send();
     } catch (error) {
       next(error);
     }
@@ -206,10 +206,10 @@ export class ExpressLoanController {
           aCapital: c.aCapital,
         }))
       );
-      res.status(204).send();
+      return res.status(204).send();
     } catch (error) {
       if (error instanceof LoanNotFoundError) {
-        res.status(404).json({ message: error.message });
+        return res.status(404).json({ message: error.message });
       }
 
       next(error);
@@ -222,10 +222,10 @@ export class ExpressLoanController {
         req.params.codEmpresa,
         Number(req.params.codPrestamo)
       );
-      res.status(204).send();
+      return res.status(204).send();
     } catch (error) {
       if (error instanceof LoanNotFoundError) {
-        res.status(404).json({ message: error.message });
+        return res.status(404).json({ message: error.message });
       }
       next(error);
     }

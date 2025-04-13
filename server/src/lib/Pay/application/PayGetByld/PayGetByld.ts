@@ -8,9 +8,10 @@ export class PayGetById {
   async run(codEmpresa: string, codPrestamo: number): Promise<Pay | null> {
     const payCodPrestamo = new PayCodPrestamo(codPrestamo);
     const payCodEmpresa = new PayCodEmpresa(codEmpresa);
-    const pay = await this.payRepository.getById(payCodEmpresa, payCodPrestamo); // Adjusted the method call to match the repository interface
+    const id = payCodEmpresa.value + payCodPrestamo.value;
+    const pay = await this.payRepository.getById(id); // Adjusted the method call to match the repository interface
     if (!pay) throw new Error("Pay not found");
-    return pay;
+    return pay || null;
   }
 }
 

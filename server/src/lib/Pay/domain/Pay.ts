@@ -45,7 +45,7 @@ export class Pay {
   tipoPago: PayTipoPago;
   observaciones: PayObservaciones;
   usuario: PayUsuario;
-  fecCrea: Date;
+  fecCrea: PayFecCrea;
 
   constructor(
     codEmpresa: PayCodEmpresa,
@@ -94,34 +94,34 @@ export class Pay {
     this.tipoPago = tipoPago;
     this.observaciones = observaciones;
     this.usuario = usuario;
-    this.fecCrea = new Date();
+    this.fecCrea = fecCrea;
   }
 
   public mapToPrimitives() {
     return {
-      codEmpresa: this.codEmpresa,
-      codPrestamo: this.codPrestamo,
-      nroCuota: this.nroCuota,
-      nroCuotas: this.nroCuotas,
-      nroDoc: this.nroDoc,
-      razonSocial: this.razonSocial,
-      garante: this.garante,
-      monto: this.monto,
-      fecVencimiento: this.fecVencimiento,
-      fecPago: this.fecPago,
-      diasRetraso: this.diasRetraso,
-      capital: this.capital,
-      seguro: this.seguro,
-      interes: this.interes,
-      tasaMora: this.tasaMora,
-      mora: this.mora,
-      totalPagar: this.totalPagar,
-      importe: this.importe,
-      saldoCapital: this.saldoCapital,
-      tipoPago: this.tipoPago,
-      observaciones: this.observaciones,
-      usuario: this.usuario,
-      fecCrea: this.fecCrea,
+      codEmpresa: this.codEmpresa.value,
+      codPrestamo: this.codPrestamo.value,
+      nroCuota: this.nroCuota.value,
+      nroCuotas: this.nroCuotas.value,
+      nroDoc: this.nroDoc.value,
+      razonSocial: this.razonSocial.value,
+      garante: this.garante.value,
+      monto: this.monto.value,
+      fecVencimiento: this.fecVencimiento.value,
+      fecPago: this.fecPago.value,
+      diasRetraso: this.diasRetraso.value,
+      capital: this.capital.value,
+      seguro: this.seguro.value,
+      interes: this.interes.value,
+      tasaMora: this.tasaMora.value,
+      mora: this.mora.value,
+      totalPagar: this.totalPagar.value,
+      importe: this.importe.value,
+      saldoCapital: this.saldoCapital.value,
+      tipoPago: this.tipoPago.value,
+      observaciones: this.observaciones.value,
+      usuario: this.usuario.value,
+      fecCrea: this.fecCrea.value,
     };
   }
 }

@@ -1,7 +1,7 @@
 export class PayUsuario {
-  usuario: string;
+  value: string;
 
-  constructor(usuario: string) {
-    this.usuario = usuario;
+  constructor(value: string) {
+    this.value = value;
   }
 }

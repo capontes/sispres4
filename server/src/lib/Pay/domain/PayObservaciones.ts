@@ -1,7 +1,7 @@
 export class PayObservaciones {
-  observaciones: string;
+  value: string;
 
-  constructor(observaciones: string) {
-    this.observaciones = observaciones;
+  constructor(value: string) {
+    this.value = value;
   }
 }

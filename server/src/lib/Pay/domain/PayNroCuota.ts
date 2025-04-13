@@ -1,12 +1,12 @@
 export class PayNroCuota {
-  NroCuota: number;
+  value: number;
 
-  constructor(NroCuota: number) {
-    this.NroCuota = NroCuota;
+  constructor(value: number) {
+    this.value = value;
     this.ensureIsValid();
   }
   ensureIsValid() {
-    if (this.NroCuota < 0)
-      throw new Error("El Numero de Cuota no puede ser menor a cero");
+    if (this.value <= 0)
+      throw new Error("El Numero de Cuota no puede ser menor o igual a cero");
   }
 }

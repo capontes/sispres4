@@ -1,12 +1,11 @@
 export class PayInteres {
-  interes: number;
+  value: number;
 
-  constructor(interes: number) {
-    this.interes = interes;
+  constructor(value: number) {
+    this.value = value;
     this.ensureIsValid();
   }
   ensureIsValid() {
-    if (this.interes < 0)
-      throw new Error("El Interes no puede ser menor a cero");
+    if (this.value < 0) throw new Error("El Interes no puede ser menor a cero");
   }
 }

@@ -1,12 +1,12 @@
 export class PayTasaMora {
-  tasaMora: number;
+  value: number;
 
-  constructor(tasaMora: number) {
-    this.tasaMora = tasaMora;
+  constructor(value: number) {
+    this.value = value;
     this.ensureIsValid();
   }
   ensureIsValid() {
-    if (this.tasaMora < 0)
+    if (this.value < 0)
       throw new Error("La Tasa de Mora no puede ser menor a cero");
   }
 }

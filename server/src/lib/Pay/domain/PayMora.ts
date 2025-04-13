@@ -1,11 +1,7 @@
 export class PayMora {
-  mora: number;
+  value: number;
 
-  constructor(mora: number) {
-    this.mora = mora;
-    this.ensureIsValid();
-  }
-  ensureIsValid() {
-    if (this.mora < 0) throw new Error("La Mora no puede ser menor a cero");
+  constructor(value: number) {
+    this.value = value;
   }
 }

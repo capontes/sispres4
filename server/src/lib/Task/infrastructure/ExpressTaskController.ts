@@ -1,5 +1,11 @@
+import { NextFunction, Request, Response } from "express";
+import { TaskNotFoundError } from "../domine/TaskNotFoundError";
+// import { ServiceContainer } from "src/lib/shared/infrastructure/ServiceContainer";
+import { ServiceContainer } from "../../shared/infrastructure/ServiceContainer";
+
 export class ExpressTaskController {
   async getAll(req: Request, res: Response, next: NextFunction) {
+    // console.log("EN getall");
     try {
       const tasks = await ServiceContainer.task.getAll.run();
       return res.json(tasks.map((task) => task.mapToPrimitives())).status(200);

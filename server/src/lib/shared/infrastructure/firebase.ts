@@ -9,10 +9,10 @@ import { FirebaseConfig } from "./env";
 // https://console.firebase.google.com/project/charapasrally/settings/serviceaccounts/adminsdk
 
 export class Firebase {
-  firebaseConfig: FirebaseApp;
+  // firebaseConfig: FirebaseApp;
+  firebaseConfig: any;
   constructor() {
     this.firebaseConfig = initializeApp(FirebaseConfig);
-    // console.log(FirebaseConfig);
   }
 
   // const fb = initializeApp(firebaseConfig);

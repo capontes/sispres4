@@ -1,12 +1,12 @@
 export class PayTipoPago {
-  TipoPago: string;
+  value: string;
 
-  constructor(TipoPago: string) {
-    this.TipoPago = TipoPago;
+  constructor(value: string) {
+    this.value = value;
     this.ensureIsValid();
   }
   ensureIsValid() {
-    if (this.TipoPago.length < 2)
+    if (this.value.length < 2)
       throw new Error("El Tipo de Pago no puede ser menor a dos caracteres");
   }
 }

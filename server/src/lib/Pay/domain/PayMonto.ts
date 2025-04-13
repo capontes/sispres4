@@ -1,11 +1,11 @@
 export class PayMonto {
-  monto: number;
+  value: number;
 
-  constructor(monto: number) {
-    this.monto = monto;
+  constructor(value: number) {
+    this.value = value;
     this.ensureIsValid();
   }
   ensureIsValid() {
-    if (this.monto < 0) throw new Error("El Monto no puede ser menor a cero");
+    if (this.value < 0) throw new Error("El Monto no puede ser menor a cero");
   }
 }

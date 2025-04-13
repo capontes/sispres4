@@ -1,12 +1,11 @@
 export class PayCapital {
-  capital: number;
+  value: number;
 
-  constructor(capital: number) {
-    this.capital = capital;
+  constructor(value: number) {
+    this.value = value;
     this.ensureIsValid();
   }
   ensureIsValid() {
-    if (this.capital < 0)
-      throw new Error("El Capital no puede ser menor a cero");
+    if (this.value < 0) throw new Error("El Capital no puede ser menor a cero");
   }
 }

@@ -7,8 +7,10 @@ export class PayNroDoc {
   }
 
   private ensureValidation() {
-    if (this.value.length < 3) {
-      throw new Error("Description must be at least 3 characters long.");
+    if (this.value.length < 8) {
+      throw new Error(
+        "Documento del cliente must be at least 8 characters long."
+      );
     }
   }
 }

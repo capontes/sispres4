@@ -1,13 +1,17 @@
 import { NextFunction, Request, Response } from "express";
 import { PayNotFoundError } from "../domain/PayNotFoundError";
-import { ServiceContainer } from "src/lib/shared/infrastructure/ServiceContainer";
+import { ServiceContainer } from "../../shared/infrastructure/ServiceContainer";
 
 export class ExpressPayController {
   async getAll(req: Request, res: Response, next: NextFunction) {
+    console.log("getALl", req.params.codEmpresa);
     try {
       const pays = await ServiceContainer.pay.getAll.run(req.params.codEmpresa);
-      res.json(pays.map((pay) => pay.mapToPrimitives())).status(200);
+      return res.json(pays.map((pay) => pay.mapToPrimitives())).status(200);
     } catch (error) {
+      if (error instanceof PayNotFoundError) {
+        return res.status(404).json({ message: error.message });
+      }
       next(error);
     }
   }
@@ -20,10 +24,10 @@ export class ExpressPayController {
         codEmpresa,
         codPrestamo
       );
-      res.json(pay?.mapToPrimitives()).status(200);
+      return res.json(pay?.mapToPrimitives()).status(200);
     } catch (error) {
       if (error instanceof PayNotFoundError) {
-        res.status(404).json({ message: error.message });
+        return res.status(404).json({ message: error.message });
       }
       next(error);
     }
@@ -105,7 +109,7 @@ export class ExpressPayController {
         usuario,
         new Date(fecCrea)
       );
-      res.status(201).send();
+      return res.status(201).send();
     } catch (error) {
       next(error);
     }
@@ -190,7 +194,7 @@ export class ExpressPayController {
       res.status(204).send();
     } catch (error) {
       if (error instanceof PayNotFoundError) {
-        res.status(404).json({ message: error.message });
+        return res.status(404).json({ message: error.message });
       }
 
       next(error);
@@ -201,11 +205,12 @@ export class ExpressPayController {
     try {
       const codEmpresa = req.body.codEmpresa;
       const codPrestamo = Number(req.body.codPrestamo);
-      await ServiceContainer.pay.delete.run(codEmpresa, codPrestamo);
+      const id = codEmpresa + codPrestamo;
+      await ServiceContainer.pay.delete.run(id);
       res.status(204).send();
     } catch (error) {
       if (error instanceof PayNotFoundError) {
-        res.status(404).json({ message: error.message });
+        return res.status(404).json({ message: error.message });
       }
 
       next(error);

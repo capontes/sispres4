@@ -8,7 +8,8 @@ export class PayCodEmpresa {
 
   private ensureValidation() {
     if (this.value.length < 3) {
-      throw new Error("Description must be at least 3 characters long.");
+      console.log(this.value.length);
+      throw new Error("Cod Empresa must be at least 3 characters long.");
     }
   }
 }

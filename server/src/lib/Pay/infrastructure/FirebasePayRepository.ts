@@ -10,6 +10,7 @@ import {
   getDocs,
   setDoc,
   Timestamp,
+  updateDoc,
 } from "firebase/firestore";
 import { PayCodPrestamo } from "../domain/PayCodPrestamo";
 import { PayCodEmpresa } from "../domain/PayCodEmpresa";
@@ -44,8 +45,8 @@ type FirebasePay = {
   razonSocial: string;
   garante: string;
   monto: number;
-  fecVencimiento: Date;
-  fecPago: Date;
+  fecVencimiento: Timestamp;
+  fecPago: Timestamp;
   diasRetraso: number;
   capital: number;
   seguro: number;
@@ -58,7 +59,7 @@ type FirebasePay = {
   tipoPago: string;
   observaciones: string;
   usuario: string;
-  fecCrea: Date;
+  fecCrea: Timestamp;
 };
 
 export class FirebasePayRepository implements PayRepository {
@@ -68,31 +69,32 @@ export class FirebasePayRepository implements PayRepository {
     this.db = new Firebase().getFirebase();
   }
   async create(pay: Pay): Promise<void> {
-    const docRef = doc(this.db, "pays", pay.codPrestamo.value.toString());
+    const id = pay.codEmpresa.value + pay.codPrestamo.value;
+    const docRef = doc(this.db, "pays", id);
     await setDoc(docRef, {
-      codEmpresa: pay.codEmpresa,
+      codEmpresa: pay.codEmpresa.value,
       codPrestamo: pay.codPrestamo.value,
-      nroCuota: pay.nroCuota,
-      nroCuotas: pay.nroCuotas,
-      nroDoc: pay.nroDoc,
-      razonSocial: pay.razonSocial,
-      garante: pay.garante,
-      monto: pay.monto,
+      nroCuota: pay.nroCuota.value,
+      nroCuotas: pay.nroCuotas.value,
+      nroDoc: pay.nroDoc.value,
+      razonSocial: pay.razonSocial.value,
+      garante: pay.garante.value,
+      monto: pay.monto.value,
       fecVencimiento: pay.fecVencimiento.value,
       fecPago: pay.fecPago.value,
-      diasRetraso: pay.diasRetraso,
-      capital: pay.capital,
-      seguro: pay.seguro,
-      interes: pay.interes,
-      tasaMora: pay.tasaMora,
-      mora: pay.mora,
+      diasRetraso: pay.diasRetraso.value,
+      capital: pay.capital.value,
+      seguro: pay.seguro.value,
+      interes: pay.interes.value,
+      tasaMora: pay.tasaMora.value,
+      mora: pay.mora.value,
       totalPagar: pay.totalPagar.value,
       importe: pay.importe.value,
       saldoCapital: pay.saldoCapital.value,
-      tipoPago: pay.tipoPago,
-      observaciones: pay.observaciones,
-      usuario: pay.usuario,
-      fecCrea: pay.fecCrea,
+      tipoPago: pay.tipoPago.value,
+      observaciones: pay.observaciones.value,
+      usuario: pay.usuario.value,
+      fecCrea: pay.fecCrea.value,
     });
   }
 
@@ -101,17 +103,12 @@ export class FirebasePayRepository implements PayRepository {
     const tasks: PaymentAddress[] = [];
     return result.docs.map((doc): Pay => {
       return this.mapToDomain({
-        codPrestamo: doc.data().codPrestamo,
         ...doc.data(),
       } as FirebasePay);
     });
   }
 
-  async getById(
-    codEmpresa: PayCodEmpresa,
-    CodPrestamo: PayCodPrestamo
-  ): Promise<Pay | null> {
-    const id = codEmpresa.value + CodPrestamo.value;
+  async getById(id: string): Promise<Pay | null> {
     const docRef = doc(this.db, "pays", id);
     const result = await getDoc(docRef);
     if (!result.exists()) return null;
@@ -129,14 +126,32 @@ export class FirebasePayRepository implements PayRepository {
       throw new Error("Pay record not found");
     }
     // const result = await getDoc(docRef);
-    await setDoc(docRef, result.data());
+    await updateDoc(docRef, {
+      nroCuota: pay.nroCuota.value,
+      nroCuotas: pay.nroCuotas.value,
+      nroDoc: pay.nroDoc.value,
+      razonSocial: pay.razonSocial.value,
+      garante: pay.garante.value,
+      monto: pay.monto.value,
+      fecVencimiento: pay.fecVencimiento.value,
+      fecPago: pay.fecPago.value,
+      diasRetraso: pay.diasRetraso.value,
+      capital: pay.capital.value,
+      seguro: pay.seguro.value,
+      interes: pay.interes.value,
+      tasaMora: pay.tasaMora.value,
+      mora: pay.mora.value,
+      totalPagar: pay.totalPagar.value,
+      importe: pay.importe.value,
+      saldoCapital: pay.saldoCapital.value,
+      tipoPago: pay.tipoPago.value,
+      observaciones: pay.observaciones.value,
+      usuario: pay.usuario.value,
+      fecCrea: pay.fecCrea.value,
+    });
   }
 
-  async delete(
-    codEmpresa: PayCodEmpresa,
-    CodPrestamo: PayCodPrestamo
-  ): Promise<void> {
-    const id = codEmpresa.value + CodPrestamo.value;
+  async delete(id: string): Promise<void> {
     const docRef = doc(this.db, "pays", id);
     await deleteDoc(docRef);
   }
@@ -151,8 +166,8 @@ export class FirebasePayRepository implements PayRepository {
       new PayRazonSocial(pay.razonSocial),
       new PayGarante(pay.garante),
       new PayMonto(pay.monto),
-      new PayFecVencimiento(pay.fecVencimiento),
-      new PayFecPago(pay.fecPago),
+      new PayFecVencimiento(pay.fecVencimiento.toDate()),
+      new PayFecPago(pay.fecPago.toDate()),
       new PayDiasRetraso(pay.diasRetraso),
       new PayCapital(pay.capital),
       new PaySeguro(pay.seguro),
@@ -165,7 +180,7 @@ export class FirebasePayRepository implements PayRepository {
       new PayTipoPago(pay.tipoPago),
       new PayObservaciones(pay.observaciones),
       new PayUsuario(pay.usuario),
-      new PayFecCrea(pay.fecCrea) // Assuming fecCrea is a timestamp or date string
+      new PayFecCrea(pay.fecCrea.toDate()) // Assuming fecCrea is a timestamp or date string
     );
   }
 }

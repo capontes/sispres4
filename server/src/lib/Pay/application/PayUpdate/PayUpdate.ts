@@ -78,10 +78,8 @@ export class PayUpdate {
     );
     const payCodEmpresa = new PayCodEmpresa(codEmpresa);
     const payCodPrestamo = new PayCodPrestamo(Number(codPrestamo));
-    const payExist = await this.payRepository.getById(
-      payCodEmpresa,
-      payCodPrestamo
-    );
+    const id = payCodEmpresa.value + payCodPrestamo.value;
+    const payExist = await this.payRepository.getById(id);
     if (!payExist) throw new Error("Pay not found");
 
     return await this.payRepository.update(pay);

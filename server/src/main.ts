@@ -1,10 +1,14 @@
 import * as express from "express";
 import { Request, Response, NextFunction } from "express";
 import { ExpressLoanRouter } from "./lib/Loan/infrastucture/ExpressLoanRouter";
+import { ExpressPayRouter } from "./lib/Pay/infrastructure/ExpressPayRouter";
+import { ExpressTaskRouter } from "./lib/Task/infrastructure/ExpressTaskRouter";
 
 const app = express();
 app.use(express.json());
 app.use(ExpressLoanRouter);
+app.use(ExpressPayRouter);
+app.use(ExpressTaskRouter);
 
 app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof Error) {

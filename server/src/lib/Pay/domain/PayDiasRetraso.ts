@@ -1,7 +1,7 @@
 export class PayDiasRetraso {
-  diasRetraso: number;
+  value: number;
 
-  constructor(diasRetraso: number) {
-    this.diasRetraso = diasRetraso;
+  constructor(value: number) {
+    this.value = value;
   }
 }

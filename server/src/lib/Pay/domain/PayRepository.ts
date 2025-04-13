@@ -5,10 +5,7 @@ import { PayCodPrestamo } from "./PayCodPrestamo";
 export interface PayRepository {
   create(Pay: Pay): Promise<void>;
   getAll(codEmpresa: PayCodEmpresa): Promise<Pay[]>;
-  getById(
-    codEmpresa: PayCodEmpresa,
-    CodPrestamo: PayCodPrestamo
-  ): Promise<Pay | null>;
+  getById(id: string): Promise<Pay | null>;
   update(Pay: Pay): Promise<void>;
-  delete(codEmpresa: PayCodEmpresa, CodPrestamo: PayCodPrestamo): Promise<void>;
+  delete(id: string): Promise<void>;
 }
