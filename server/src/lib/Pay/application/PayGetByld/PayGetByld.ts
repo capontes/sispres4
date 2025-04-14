@@ -5,12 +5,9 @@ import { PayRepository } from "../../domain/PayRepository"; // Ensure this file 
 
 export class PayGetById {
   constructor(private payRepository: PayRepository) {}
-  async run(codEmpresa: string, codPrestamo: number): Promise<Pay | null> {
-    const payCodPrestamo = new PayCodPrestamo(codPrestamo);
-    const payCodEmpresa = new PayCodEmpresa(codEmpresa);
-    const id = payCodEmpresa.value + payCodPrestamo.value;
+  async run(id: string): Promise<Pay | null> {
     const pay = await this.payRepository.getById(id); // Adjusted the method call to match the repository interface
-    if (!pay) throw new Error("Pay not found");
+    // if (!pay) throw new Error("Pay not found");
     return pay || null;
   }
 }

@@ -8,9 +8,11 @@ import {
   Firestore,
   getDoc,
   getDocs,
+  query,
   setDoc,
   Timestamp,
   updateDoc,
+  where,
 } from "firebase/firestore";
 import { PayCodPrestamo } from "../domain/PayCodPrestamo";
 import { PayCodEmpresa } from "../domain/PayCodEmpresa";
@@ -98,13 +100,15 @@ export class FirebasePayRepository implements PayRepository {
     });
   }
 
-  async getAll(): Promise<Pay[]> {
-    const result = await getDocs(collection(this.db, "pays"));
+  async getAll(codEmpresa: PayCodEmpresa): Promise<Pay[]> {
+    const q = query(
+      collection(this.db, "pays"),
+      where("codEmpresa", "==", codEmpresa.value)
+    );
+    const result = await getDocs(q);
     const tasks: PaymentAddress[] = [];
     return result.docs.map((doc): Pay => {
-      return this.mapToDomain({
-        ...doc.data(),
-      } as FirebasePay);
+      return this.mapToDomain(doc.data() as FirebasePay);
     });
   }
 
@@ -112,10 +116,7 @@ export class FirebasePayRepository implements PayRepository {
     const docRef = doc(this.db, "pays", id);
     const result = await getDoc(docRef);
     if (!result.exists()) return null;
-    return this.mapToDomain({
-      codPrestamo: result.data().codPrestamo,
-      ...result.data(),
-    } as FirebasePay);
+    return this.mapToDomain(result.data() as FirebasePay);
   }
 
   async update(pay: Pay): Promise<void> {

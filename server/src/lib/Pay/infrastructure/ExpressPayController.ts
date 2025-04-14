@@ -1,12 +1,14 @@
 import { NextFunction, Request, Response } from "express";
 import { PayNotFoundError } from "../domain/PayNotFoundError";
 import { ServiceContainer } from "../../shared/infrastructure/ServiceContainer";
+import { PayCodEmpresa } from "../domain/PayCodEmpresa";
+import { PayCodPrestamo } from "../domain/PayCodPrestamo";
 
 export class ExpressPayController {
   async getAll(req: Request, res: Response, next: NextFunction) {
-    console.log("getALl", req.params.codEmpresa);
     try {
-      const pays = await ServiceContainer.pay.getAll.run(req.params.codEmpresa);
+      const codEmpresa = new PayCodEmpresa(req.params.codEmpresa);
+      const pays = await ServiceContainer.pay.getAll.run(codEmpresa.value);
       return res.json(pays.map((pay) => pay.mapToPrimitives())).status(200);
     } catch (error) {
       if (error instanceof PayNotFoundError) {
@@ -18,12 +20,10 @@ export class ExpressPayController {
 
   async getById(req: Request, res: Response, next: NextFunction) {
     try {
-      const codEmpresa = req.body.codEmpresa;
-      const codPrestamo = Number(req.body.codPrestamo);
-      const pay = await ServiceContainer.pay.getById.run(
-        codEmpresa,
-        codPrestamo
-      );
+      const codEmpresa = new PayCodEmpresa(req.params.codEmpresa);
+      const codPrestamo = new PayCodPrestamo(Number(req.params.codPrestamo));
+      const id = codEmpresa.value + codPrestamo.value;
+      const pay = await ServiceContainer.pay.getById.run(id);
       return res.json(pay?.mapToPrimitives()).status(200);
     } catch (error) {
       if (error instanceof PayNotFoundError) {
@@ -203,9 +203,9 @@ export class ExpressPayController {
 
   async delete(req: Request, res: Response, next: NextFunction) {
     try {
-      const codEmpresa = req.body.codEmpresa;
-      const codPrestamo = Number(req.body.codPrestamo);
-      const id = codEmpresa + codPrestamo;
+      const codEmpresa = new PayCodEmpresa(req.params.codEmpresa);
+      const codPrestamo = new PayCodPrestamo(Number(req.params.codPrestamo));
+      const id = codEmpresa.value + codPrestamo.value;
       await ServiceContainer.pay.delete.run(id);
       res.status(204).send();
     } catch (error) {
