@@ -2,24 +2,30 @@ import { NextFunction, Request, Response } from "express";
 // import { ServiceContainer } from "src/lib/shared/infrastructure/ServiceContainer";
 import { ServiceContainer } from "../../shared/infrastructure/ServiceContainer";
 import { LoanNotFoundError } from "../domain/LoanNotFoundError";
+import { LoanCodEmpresa } from "../domain/LoanCodEmpresa";
+import { LoanCodPrestamo } from "../domain/LoanCodPrestamo";
 
 export class ExpressLoanController {
   async getAll(req: Request, res: Response, next: NextFunction) {
     try {
-      const loans = await ServiceContainer.loan.getAll.run(
-        req.params.codEmpresa
-      );
+      const codEmpresa = new LoanCodEmpresa(req.params.codEmpresa);
+      const loans = await ServiceContainer.loan.getAll.run(codEmpresa.value);
       return res.json(loans.map((loan) => loan.mapToPrimitives())).status(200);
     } catch (error) {
+      if (error instanceof LoanNotFoundError) {
+        return res.status(404).json({ message: error.message });
+      }
       next(error);
     }
   }
 
   async getById(req: Request, res: Response, next: NextFunction) {
     try {
+      const codEmpresa = new LoanCodEmpresa(req.params.codEmpresa);
+      const codPrestamo = new LoanCodPrestamo(Number(req.params.codPrestamo));
       const loan = await ServiceContainer.loan.getById.run(
-        req.params.codEmpresa,
-        Number(req.params.codPrestamo)
+        codEmpresa.value,
+        codPrestamo.value
       );
       return res.json(loan?.mapToPrimitives()).status(200);
     } catch (error) {

@@ -5,7 +5,6 @@ import { ServiceContainer } from "../../shared/infrastructure/ServiceContainer";
 
 export class ExpressTaskController {
   async getAll(req: Request, res: Response, next: NextFunction) {
-    // console.log("EN getall");
     try {
       const tasks = await ServiceContainer.task.getAll.run();
       return res.json(tasks.map((task) => task.mapToPrimitives())).status(200);

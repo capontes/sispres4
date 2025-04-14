@@ -6,8 +6,11 @@ import {
   Firestore,
   getDoc,
   getDocs,
+  query,
   setDoc,
   Timestamp,
+  updateDoc,
+  where,
 } from "firebase/firestore";
 import { LoanRepository } from "../domain/LoanRepository";
 import { Loan } from "../domain/Loan";
@@ -71,7 +74,11 @@ export class FirebaseLoanRepository implements LoanRepository {
   }
 
   async getAll(codEmpresa: LoanCodEmpresa): Promise<Loan[]> {
-    const result = await getDocs(collection(this.db, "loans"));
+    const q = query(
+      collection(this.db, "loans"),
+      where("codEmpresa", "==", codEmpresa.value)
+    );
+    const result = await getDocs(q);
     const loans: Loan[] = [];
     return result.docs.map((doc) => {
       return this.mapToDomain(doc.data() as FirebaseLoan);
@@ -94,12 +101,72 @@ export class FirebaseLoanRepository implements LoanRepository {
   async create(loan: Loan): Promise<void> {
     const id = loan.codEmpresa.value + loan.codPrestamo.value;
     const docRef = doc(this.db, "loans", id);
-    await setDoc(docRef, loan);
+    await setDoc(docRef, {
+      codEmpresa: loan.codEmpresa.value,
+      codPrestamo: loan.codPrestamo.value,
+      nroDoc: loan.nroDoc.value,
+      razonSocial: loan.razonSocial.value,
+      garante: loan.garante.value,
+      tasaInteres: loan.tasaInteres.value,
+      capital: loan.capital.value,
+      nroCuotas: loan.nroCuotas.value,
+      seguro: loan.seguro.value,
+      gastosAdministrativos: loan.gastosAdministrativos.value,
+      fecProcedo: loan.fecProcedo.value,
+      fecInicio: loan.fecInicio.value,
+      estado: loan.estado.value,
+      saldoCapital: loan.saldoCapital.value,
+      observaciones: loan.observaciones.value,
+      usuario: loan.usuario.value,
+      fecCrea: loan.fecCrea.value,
+      cuotas: loan.cuotas.map((c) => ({
+        nroCuota: c.nroCuota,
+        fecVencimiento: new Date(c.fecVencimiento),
+        monto: c.monto,
+        capital: c.capital,
+        seguro: c.seguro,
+        interes: c.interes,
+        saldoCapital: c.saldoCapital,
+        mora: c.mora,
+        aInteres: c.aInteres,
+        aSeguro: c.aSeguro,
+        aCapital: c.aCapital,
+      })),
+    });
   }
   async update(loan: Loan): Promise<void> {
     const id = loan.codEmpresa.value + loan.codPrestamo.value;
     const docRef = doc(this.db, "loans", id);
-    await setDoc(docRef, loan);
+    await updateDoc(docRef, {
+      nroDoc: loan.nroDoc.value,
+      razonSocial: loan.razonSocial.value,
+      garante: loan.garante.value,
+      tasaInteres: loan.tasaInteres.value,
+      capital: loan.capital.value,
+      nroCuotas: loan.nroCuotas.value,
+      seguro: loan.seguro.value,
+      gastosAdministrativos: loan.gastosAdministrativos.value,
+      fecProcedo: loan.fecProcedo.value,
+      fecInicio: loan.fecInicio.value,
+      estado: loan.estado.value,
+      saldoCapital: loan.saldoCapital.value,
+      observaciones: loan.observaciones.value,
+      usuario: loan.usuario.value,
+      fecCrea: loan.fecCrea.value,
+      cuotas: loan.cuotas.map((c) => ({
+        nroCuota: c.nroCuota,
+        fecVencimiento: new Date(c.fecVencimiento),
+        monto: c.monto,
+        capital: c.capital,
+        seguro: c.seguro,
+        interes: c.interes,
+        saldoCapital: c.saldoCapital,
+        mora: c.mora,
+        aInteres: c.aInteres,
+        aSeguro: c.aSeguro,
+        aCapital: c.aCapital,
+      })),
+    });
   }
 
   async delete(
