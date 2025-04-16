@@ -3,12 +3,14 @@ import { Request, Response, NextFunction } from "express";
 import { ExpressLoanRouter } from "./lib/Loan/infrastucture/ExpressLoanRouter";
 import { ExpressPayRouter } from "./lib/Pay/infrastructure/ExpressPayRouter";
 import { ExpressTaskRouter } from "./lib/Task/infrastructure/ExpressTaskRouter";
+import { ExpressCustomerRouter } from "./lib/customer/infrastucture/EspressCustomerRouter";
 
 const app = express();
 app.use(express.json());
 app.use(ExpressLoanRouter);
 app.use(ExpressPayRouter);
 app.use(ExpressTaskRouter);
+app.use(ExpressCustomerRouter);
 
 app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof Error) {

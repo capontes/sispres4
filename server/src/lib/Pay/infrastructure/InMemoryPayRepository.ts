@@ -43,12 +43,9 @@ export class InMemoryPayRepository implements PayRepository {
     codEmpresa: PayCodEmpresa,
     CodPrestamo: PayCodPrestamo
   ): Promise<void> {
-    const id = codEmpresa.value + CodPrestamo.value.toString();
-    const index = this.pays.findIndex(
+    const id = codEmpresa.value + CodPrestamo.value;
+    this.pays = this.pays.filter(
       (pay) => pay.codEmpresa.value + pay.codPrestamo.value === id
     );
-    if (index === -1) throw new Error("Pay not found");
-
-    this.pays.splice(index, 1);
   }
 }
