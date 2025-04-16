@@ -20,16 +20,16 @@ export class Customer {
   tipoDoc: CustomerTipoDoc;
   nroDoc: CustomerNroDoc;
   nomComercialCli: CustomerNomComercialCli;
-  RazónSocial: CustomerRazonSocial;
-  dirección: CustomerDireccion;
+  razonSocial: CustomerRazonSocial;
+  direccion: CustomerDireccion;
   phone: CustomerPhone;
-  Email: CustomerEmail;
+  email: CustomerEmail;
   garante: CustomerGarante;
-  evaluación: CustomerEvaluacion;
+  evaluacion: CustomerEvaluacion;
   tasaInteres: CustomerTasaInteres;
   tasaMora: CustomerTasaMora;
   estado: CustomerEstado;
-  garantía: CustomerGarantia;
+  garantia: CustomerGarantia;
   usuario: CustomerUsuario;
   observaciones: CustomerObservaciones;
 
@@ -38,16 +38,16 @@ export class Customer {
     tipoDoc: CustomerTipoDoc,
     nroDoc: CustomerNroDoc,
     nomComercialCli: CustomerNomComercialCli,
-    RazónSocial: CustomerRazonSocial,
-    dirección: CustomerDireccion,
+    razonSocial: CustomerRazonSocial,
+    direccion: CustomerDireccion,
     phone: CustomerPhone,
-    Email: CustomerEmail,
+    email: CustomerEmail,
     garante: CustomerGarante,
-    evaluación: CustomerEvaluacion,
+    evaluacion: CustomerEvaluacion,
     tasaInteres: CustomerTasaInteres,
     tasaMora: CustomerTasaMora,
     estado: CustomerEstado,
-    garantía: CustomerGarantia,
+    garantia: CustomerGarantia,
     usuario: CustomerUsuario,
     observaciones: CustomerObservaciones
   ) {
@@ -55,16 +55,16 @@ export class Customer {
     this.tipoDoc = tipoDoc;
     this.nroDoc = nroDoc;
     this.nomComercialCli = nomComercialCli;
-    this.RazónSocial = RazónSocial;
-    this.dirección = dirección;
+    this.razonSocial = razonSocial;
+    this.direccion = direccion;
     this.phone = phone;
-    this.Email = Email;
+    this.email = email;
     this.garante = garante;
-    this.evaluación = evaluación;
+    this.evaluacion = evaluacion;
     this.tasaInteres = tasaInteres;
     this.tasaMora = tasaMora;
     this.estado = estado;
-    this.garantía = garantía;
+    this.garantia = garantia;
     this.usuario = usuario;
     this.observaciones = observaciones;
   }
@@ -74,16 +74,16 @@ export class Customer {
       tipoDoc: this.tipoDoc.value,
       nroDoc: this.nroDoc.value,
       nomComercialCli: this.nomComercialCli.value,
-      RazónSocial: this.RazónSocial.value,
-      dirección: this.dirección.value,
-      teléfono: this.phone.value,
-      Email: this.Email.value,
+      razonSocial: this.razonSocial.value,
+      direccion: this.direccion.value,
+      phone: this.phone.value,
+      email: this.email.value,
       garante: this.garante.value,
-      evaluación: this.evaluación.value,
+      evaluacion: this.evaluacion.value,
       tasaInteres: this.tasaInteres.value,
       tasaMora: this.tasaMora.value,
       estado: this.estado.value,
-      garantía: this.garantía.value,
+      garantia: this.garantia.value,
       usuario: this.usuario.value,
       observaciones: this.observaciones.value,
     };

@@ -7,7 +7,7 @@ export class CustomerDireccion {
   }
 
   ensureValidate() {
-    if (this.value.length < 5)
+    if (this.value.length < 3)
       throw Error("La dirección debe tener al menos 5 caracteres");
   }
 }

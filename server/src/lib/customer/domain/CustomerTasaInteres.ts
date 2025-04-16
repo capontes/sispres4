@@ -6,7 +6,7 @@ export class CustomerTasaInteres {
   }
 
   ensureValidate() {
-    if (this.value < 0 || this.value > 100)
-      throw Error("Tasa de Interes debe estar entre 0 y 100");
+    if (this.value < 0)
+      throw Error("Tasa de Interes debe ser mayor o igual a 0");
   }
 }

@@ -7,8 +7,7 @@ export class CustomerEstado {
   }
 
   ensureValidate() {
-    if (this.value.length > 1)
-      throw Error("Estado debe tener un solo caracter");
+    if (this.value.length !== 3) throw Error("Estado debe tener tres caracter");
   }
 }
 //   }
