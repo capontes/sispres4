@@ -17,11 +17,7 @@ export class InMemoryPayRepository implements PayRepository {
     return this.pays;
   }
 
-  async getById(
-    codEmpresa: PayCodEmpresa,
-    CodPrestamo: PayCodPrestamo
-  ): Promise<Pay | null> {
-    const id = codEmpresa.value + CodPrestamo.value.toString();
+  async getById(id: string): Promise<Pay | null> {
     const pay = this.pays.find(
       (pay) => pay.codEmpresa.value + pay.codPrestamo.value === id
     );
@@ -39,11 +35,7 @@ export class InMemoryPayRepository implements PayRepository {
     this.pays[index] = pay;
   }
 
-  async delete(
-    codEmpresa: PayCodEmpresa,
-    CodPrestamo: PayCodPrestamo
-  ): Promise<void> {
-    const id = codEmpresa.value + CodPrestamo.value;
+  async delete(id: string): Promise<void> {
     this.pays = this.pays.filter(
       (pay) => pay.codEmpresa.value + pay.codPrestamo.value === id
     );
