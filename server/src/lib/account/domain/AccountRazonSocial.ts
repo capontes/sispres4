@@ -1,4 +1,4 @@
-export class CustomerDireccion {
+export class AccountRazonSocial {
   value: string;
 
   constructor(value: string) {
@@ -8,6 +8,6 @@ export class CustomerDireccion {
 
   ensureValidate() {
     if (this.value.length < 3)
-      throw Error("La dirección debe tener al menos 3 caracteres");
+      throw Error("Razon Soicial debe tener menos de 3 caracteres");
   }
 }

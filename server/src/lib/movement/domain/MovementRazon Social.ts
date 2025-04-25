@@ -1,4 +1,4 @@
-export class CustomerDireccion {
+export class MovementRazonSocial {
   value: string;
 
   constructor(value: string) {
@@ -8,6 +8,6 @@ export class CustomerDireccion {
 
   ensureValidate() {
     if (this.value.length < 3)
-      throw Error("La dirección debe tener al menos 3 caracteres");
+      throw Error("Razon Social debe tener menos de 3 Caracteres");
   }
 }
