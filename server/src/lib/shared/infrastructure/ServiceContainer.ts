@@ -49,6 +49,13 @@ import { BoxCreate } from "../../box/application/BoxCreate/BoxCreate";
 import { BoxUpdate } from "../../box/application/BoxUpdate/BoxUpdate";
 import { BoxDelete } from "../../box/application/BoxDelete/BoxDelete";
 import { FirebaseBoxRepository } from "../../box/infrastructure/FirebaseBoxRepository";
+import { Enterprise } from "src/lib/enterprise/domain/Enterprise";
+import { EnterpriseGetAll } from "../../enterprise/application/EnterpriseGetAll/EnterpriseGetAll";
+import { EnterpriseGetById } from "../../enterprise/application/EnterpriseGetById/EnterpriseGetById";
+import { EnterpriseCreate } from "../../enterprise/application/EnterpriseCreate/EnterpriseCreate";
+import { EnterpriseUpdate } from "../../enterprise/application/EnterpriseUpdate/EnterpriseUpdate";
+import { EnterpriseDelete } from "../../enterprise/application/EnterpriseDelete/EnterpriseDelete";
+import { FirebaseEnterpriseRepository } from "../../enterprise/infrastructure/FirebaseEnterpriseRepository";
 
 const loanRepository = new FirebaseLoanRepository();
 //const loanRepository = new InMemoryLoanRepository();
@@ -60,6 +67,7 @@ const movementRepository = new FirebaseMovementRepository();
 const accountRepository = new FirebaseAccountRepository();
 const warehouseRepository = new FirebaseWarehouseRepository();
 const boxRepository = new FirebaseBoxRepository();
+const emterpriseRepository = new FirebaseEnterpriseRepository();
 
 export const ServiceContainer = {
   loan: {
@@ -117,5 +125,12 @@ export const ServiceContainer = {
     create: new BoxCreate(boxRepository),
     update: new BoxUpdate(boxRepository),
     delete: new BoxDelete(boxRepository),
+  },
+  Enterprise: {
+    getAll: new EnterpriseGetAll(emterpriseRepository),
+    getById: new EnterpriseGetById(emterpriseRepository),
+    create: new EnterpriseCreate(emterpriseRepository),
+    update: new EnterpriseUpdate(emterpriseRepository),
+    delete: new EnterpriseDelete(emterpriseRepository),
   },
 };
