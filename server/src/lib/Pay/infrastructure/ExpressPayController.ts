@@ -8,7 +8,11 @@ export class ExpressPayController {
   async getAll(req: Request, res: Response, next: NextFunction) {
     try {
       const codEmpresa = new PayCodEmpresa(req.params.codEmpresa);
-      const pays = await ServiceContainer.pay.getAll.run(codEmpresa.value);
+      const codPrestamo = new PayCodPrestamo(Number(req.params.codPrestamo));
+      const pays = await ServiceContainer.pay.getAll.run(
+        codEmpresa.value,
+        codPrestamo.value
+      );
       return res.json(pays.map((pay) => pay.mapToPrimitives())).status(200);
     } catch (error) {
       if (error instanceof PayNotFoundError) {

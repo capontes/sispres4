@@ -7,7 +7,7 @@ export class CustomerTasaMora {
   }
 
   ensureValidate() {
-    if (this.value < 0 || this.value < 0)
-      throw Error("Tasa de Mora debe ser mayor e igual 0");
+    if (this.value < 0)
+      throw Error("Tasa de Mora debe ser mayor o igual a cero");
   }
 }

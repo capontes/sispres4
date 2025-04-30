@@ -1,6 +1,5 @@
 import * as express from "express";
 import { Request, Response, NextFunction } from "express";
-import { ExpressLoanRouter } from "./lib/Loan/infrastucture/ExpressLoanRouter";
 import { ExpressPayRouter } from "./lib/Pay/infrastructure/ExpressPayRouter";
 import { ExpressTaskRouter } from "./lib/Task/infrastructure/ExpressTaskRouter";
 import { ExpressCustomerRouter } from "./lib/customer/infrastucture/EspressCustomerRouter";
@@ -9,6 +8,7 @@ import { ExpressAccountRouter } from "./lib/account/infrastructure/Express Accou
 import { ExpressWarehouseRouter } from "./lib/warehouse/infrastructure/ExpressWarehouseRouter";
 import { ExpressBoxRouter } from "./lib/box/infrastructure/ExpressBoxRouter";
 import { ExpressEnterpriseRouter } from "./lib/enterprise/infrastructure/ExpressEnterpriseRouter";
+import { ExpressLoanRouter } from "./lib/Loan/infrastucture/ExpressLoanRouter";
 
 const app = express();
 app.use(express.json());
