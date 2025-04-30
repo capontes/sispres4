@@ -7,7 +7,7 @@ export class CustomerRazonSocial {
   }
 
   ensureValidate() {
-    if (this.value.length > 50)
-      throw Error("Razon Social debe tener menos de 50 Caracteres");
+    if (this.value.length < 3)
+      throw Error("Razon Social debe tener al menos de 3 Caracteres");
   }
 }

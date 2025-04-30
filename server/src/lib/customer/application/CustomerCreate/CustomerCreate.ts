@@ -55,6 +55,7 @@ export class CustomerCreate {
       new CustomerUsuario(usuario),
       new CustomerObservaciones(observaciones)
     );
+    console.log(customer);
     await this.customerRepository.create(customer);
   }
 }

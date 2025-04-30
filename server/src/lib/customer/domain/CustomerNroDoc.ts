@@ -7,7 +7,7 @@ export class CustomerNroDoc {
   }
 
   ensureValidate() {
-    if (this.value.length !== 8)
-      throw Error("Nro de Documento debe tener 8 Caracteres");
+    if (this.value.length < 8)
+      throw Error("Nro de Documento debe tener al menos 8 Caracteres");
   }
 }

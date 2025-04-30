@@ -7,7 +7,7 @@ export class CustomerTipoDoc {
   }
 
   ensureValidate() {
-    if (this.value.length !== 1)
-      throw Error("Tipo de Documento debe tener 1 Caracteres");
+    if (this.value.length !== 2)
+      throw Error("Tipo de Documento debe tener 2 Caracteres");
   }
 }

@@ -7,7 +7,7 @@ export class CustomerEvaluacion {
   }
 
   ensureValidate() {
-    if (this.value.length > 1)
-      throw Error("Estado debe tener un solo caracter");
+    if (this.value.length < 3)
+      throw Error("Estado debe tener al menos 3 caracter");
   }
 }
