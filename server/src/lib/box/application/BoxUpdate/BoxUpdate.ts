@@ -38,7 +38,7 @@ export class BoxUpdate {
     fecApertura: Date,
     fecCierre: Date,
     cierreDiario: {
-      diametro: string;
+      dia: string;
       estadoDia: string; //A=APERTURADO, C=CERRADO
       nroMovientosDia: number;
       saldoInicialDia: number;
@@ -74,7 +74,7 @@ export class BoxUpdate {
       cierreDiario.map(
         (c) =>
           new BoxCierreDiario(
-            c.diametro,
+            c.dia,
             c.estadoDia, //A=APERTURADO, C=CERRADO
             c.nroMovientosDia,
             c.saldoInicialDia,
@@ -86,7 +86,8 @@ export class BoxUpdate {
             c.saldoFinalDia,
             c.usuAperturaDia,
             c.usuCierraDia,
-            c.fecAperturaDia
+            c.fecAperturaDia,
+            c.fecCierreDia
           )
       )
     );

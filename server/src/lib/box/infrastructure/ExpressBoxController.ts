@@ -76,7 +76,7 @@ export class ExpressBoxController {
         fecApertura: Date;
         fecCierre: Date;
         cierreDiario: {
-          diametro: string;
+          dia: string;
           estadoDia: string; //A=APERTURADO, C=CERRADO
           nroMovientosDia: number;
           saldoInicialDia: number;
@@ -110,7 +110,7 @@ export class ExpressBoxController {
         new Date(fecApertura),
         new Date(fecCierre),
         cierreDiario.map((c) => ({
-          diametro: c.diametro,
+          dia: c.dia,
           estadoDia: c.estadoDia, //A=APERTURADO, C=CERRADO
           nroMovientosDia: c.nroMovientosDia,
           saldoInicialDia: c.saldoInicialDia,
@@ -170,7 +170,7 @@ export class ExpressBoxController {
         fecApertura: Date;
         fecCierre: Date;
         cierreDiario: {
-          diametro: string;
+          dia: string;
           estadoDia: string; //A=APERTURADO, C=CERRADO
           nroMovientosDia: number;
           saldoInicialDia: number;
@@ -204,7 +204,7 @@ export class ExpressBoxController {
         new Date(fecApertura),
         new Date(fecCierre),
         cierreDiario.map((c) => ({
-          diametro: c.diametro,
+          dia: c.dia,
           estadoDia: c.estadoDia, //A=APERTURADO, C=CERRADO
           nroMovientosDia: c.nroMovientosDia,
           saldoInicialDia: c.saldoInicialDia,

@@ -48,7 +48,7 @@ type FirebaseBox = {
   fecApertura: Date;
   fecCierre: Date;
   cierreDiario: {
-    diametro: string;
+    dia: string;
     estadoDia: string; //A=APERTURADO, C=CERRADO
     nroMovientosDia: number;
     saldoInicialDia: number;
@@ -119,7 +119,7 @@ export class FirebaseBoxRepository implements BoxRepository {
       fecApertura: new Date(box.fecApertura.value),
       fecCierre: new Date(box.fecCierre.value),
       cierreDiario: box.cierreDiario.map((c) => ({
-        diametro: c.diametro,
+        dia: c.dia,
         estadoDia: c.estadoDia, //A=APERTURADO, C=CERRADO
         nroMovientosDia: c.nroMovientosDia,
         saldoInicialDia: c.saldoInicialDia,
@@ -169,12 +169,12 @@ export class FirebaseBoxRepository implements BoxRepository {
       new BoxSaldoFinal(box.saldoFinal),
       new BoxUsuApertura(box.usuApertura),
       new BoxUsuCierra(box.usuCierra),
-      new BoxFecApertura(box.fecApertura.toDate()),
-      new BoxFecCierre(box.fecCierre.toDate()),
+      new BoxFecApertura(box.fecApertura),
+      new BoxFecCierre(box.fecCierre),
       box.cierreDiario.map(
         (c) =>
           new BoxCierreDiario(
-            c.diametro,
+            c.dia,
             c.estadoDia, //A=APERTURADO, C=CERRADO
             c.nroMovientosDia,
             c.saldoInicialDia,
@@ -186,8 +186,8 @@ export class FirebaseBoxRepository implements BoxRepository {
             c.saldoFinalDia,
             c.usuAperturaDia,
             c.usuCierraDia,
-            c.fecAperturaDia.toDate(),
-            c.fecCierreDia.toDate()
+            c.fecAperturaDia,
+            c.fecCierreDia
           )
       )
     );

@@ -1,10 +1,11 @@
 export class BoxCierreDiario {
-  diametro: string;
+  dia: string;
   estadoDia: string;
   nroMovientosDia: number;
   saldoInicialDia: number;
   capitalPrestadoDia: number;
   capitalCobradoDia: number;
+  seguroCobradoDia: number;
   interesCobradoDia: number;
   moraCobradoDia: number;
   saldoFinalDia: number;
@@ -13,12 +14,13 @@ export class BoxCierreDiario {
   fecAperturaDia: Date;
   fecCierreDia: Date;
   constructor(
-    diametro: string,
+    dia: string,
     estadoDia: string,
     nroMovientosDia: number,
     saldoInicialDia: number,
     capitalPrestadoDia: number,
     capitalCobradoDia: number,
+    seguroCobradoDia: number,
     interesCobradoDia: number,
     moraCobradoDia: number,
     saldoFinalDia: number,
@@ -27,12 +29,13 @@ export class BoxCierreDiario {
     fecAperturaDia: Date,
     fecCierreDia: Date
   ) {
-    this.diametro = diametro;
+    this.dia = dia;
     this.estadoDia = estadoDia;
     this.nroMovientosDia = nroMovientosDia;
     this.saldoInicialDia = saldoInicialDia;
     this.capitalPrestadoDia = capitalPrestadoDia;
     this.capitalCobradoDia = capitalCobradoDia;
+    this.seguroCobradoDia = seguroCobradoDia;
     this.interesCobradoDia = interesCobradoDia;
     this.moraCobradoDia = moraCobradoDia;
     this.saldoFinalDia = saldoFinalDia;
