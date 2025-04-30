@@ -9,13 +9,16 @@ export class InMemoryCustomerRepository implements CustomerRepository {
     this.customers.push(customer);
   }
 
-  async getAll(): Promise<Customer[]> {
+  async getAll(codEmpresa: CustomerCodEmpresa): Promise<Customer[]> {
+    const customer = this.customers.filter(
+      (c) => c.codEmpresa.value == codEmpresa.value
+    );
     return this.customers;
   }
 
-  async getById(codEmpleado: CustomerCodEmpresa): Promise<Customer | null> {
+  async getById(id: string): Promise<Customer | null> {
     const customer = this.customers.find(
-      (customer) => customer.codEmpresa.value === codEmpleado.value
+      (customer) => customer.codEmpresa.value === id
     );
     return customer || null;
   }
@@ -31,9 +34,7 @@ export class InMemoryCustomerRepository implements CustomerRepository {
     }
   }
 
-  async delete(id: CustomerCodEmpresa): Promise<void> {
-    this.customers = this.customers.filter(
-      (customer) => customer.codEmpresa.value !== id.value
-    );
+  async delete(id: string): Promise<void> {
+    this.customers = this.customers.filter((c) => c.codEmpresa.value !== id);
   }
 }

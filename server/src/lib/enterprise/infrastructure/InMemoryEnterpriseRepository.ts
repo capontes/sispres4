@@ -10,13 +10,13 @@ export class InMemoryEnterpriseRepository implements EnterpriseRepository {
   }
 
   async getAll(codEmpresa: EnterpriseCodEmpresa): Promise<Enterprise[]> {
-    const loan = this.enterprise.filter(
+    const enterprise = this.enterprise.filter(
       (e) => e.codEmpresa.value == codEmpresa.value
     );
     return this.enterprise;
   }
 
-  async getById(codEmpresa: EnterpriseCodEmpresa): Promise<Loan | null> {
+  async getById(codEmpresa: EnterpriseCodEmpresa): Promise<Enterprise | null> {
     const id = codEmpresa.value;
     const enterprise = this.enterprise.find(
       (enterprise) => enterprise.codEmpresa.value === id

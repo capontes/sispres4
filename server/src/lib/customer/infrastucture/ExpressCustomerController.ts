@@ -8,7 +8,7 @@ export class ExpressCustomerController {
   async getAll(req: Request, res: Response, next: NextFunction) {
     try {
       const codEmpresa = new CustomerCodEmpresa(req.params.codEmpresa);
-      const customers = await ServiceContainer.Customer.getAll.run(
+      const customers = await ServiceContainer.customer.getAll.run(
         codEmpresa.value
       );
       return res
@@ -27,7 +27,7 @@ export class ExpressCustomerController {
       const codEmpresa = new CustomerCodEmpresa(req.params.codEmpresa);
       const nroDoc = new CustomerNroDoc(req.params.nroDoc);
       const id = codEmpresa.value + nroDoc.value;
-      const customer = await ServiceContainer.Customer.getById.run(id);
+      const customer = await ServiceContainer.customer.getById.run(id);
       return res.json(customer?.mapToPrimitives()).status(200);
     } catch (error) {
       if (error instanceof CustomerNotFoundError) {
@@ -74,7 +74,7 @@ export class ExpressCustomerController {
         usuario: string;
         observaciones: string;
       };
-      await ServiceContainer.Customer.create.run(
+      await ServiceContainer.customer.create.run(
         codEmpresa,
         tipoDoc,
         nroDoc,
@@ -135,7 +135,7 @@ export class ExpressCustomerController {
         usuario: string;
         observaciones: string;
       };
-      await ServiceContainer.Customer.update.run(
+      await ServiceContainer.customer.update.run(
         codEmpresa,
         tipoDoc,
         nroDoc,
@@ -167,7 +167,7 @@ export class ExpressCustomerController {
       const codEmpresa = new CustomerCodEmpresa(req.params.codEmpresa);
       const nroDoc = new CustomerNroDoc(req.params.nroDoc);
       const id = codEmpresa.value + nroDoc.value;
-      await ServiceContainer.Customer.delete.run(id);
+      await ServiceContainer.customer.delete.run(id);
       return res.status(204).send();
     } catch (error) {
       if (error instanceof CustomerNotFoundError) {
