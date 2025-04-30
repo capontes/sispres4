@@ -1,6 +1,6 @@
 import { NextFunction, Response, Request } from "express";
 import { EnterpriseCodEmpresa } from "../domain/EnterpriseCodEmpresa";
-import { ServiceContainer } from "src/lib/shared/infrastructure/ServiceContainer";
+import { ServiceContainer } from "../../shared/infrastructure/ServiceContainer";
 import { EnterpriseNotFoundError } from "../domain/EnterpriseNotFoundError";
 
 export class ExpressEnterpriseController {

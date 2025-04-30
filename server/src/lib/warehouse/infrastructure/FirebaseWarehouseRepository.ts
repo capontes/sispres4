@@ -10,7 +10,7 @@ import {
   where,
 } from "firebase/firestore";
 import { WarehouseRepository } from "../domain/WarehouseRepository";
-import { Firebase } from "src/lib/shared/infrastructure/firebase";
+import { Firebase } from "../../shared/infrastructure/firebase";
 import { WarehouseCodEmpresa } from "../domain/WarehouseCodEmpresa";
 import { Warehouse } from "../domain/Warehouse";
 import { WarehouseCodAlm } from "../domain/WarehouseCodAlm";

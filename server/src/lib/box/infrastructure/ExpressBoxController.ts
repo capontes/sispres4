@@ -1,6 +1,6 @@
 import { json, NextFunction, Request, Response } from "express";
 import { BoxCodEmpresa } from "../domain/BoxCodEmpresa";
-import { ServiceContainer } from "src/lib/shared/infrastructure/ServiceContainer";
+import { ServiceContainer } from "../../shared/infrastructure/ServiceContainer";
 import { BoxNotFoundError } from "../domain/BoxNotFoundError";
 import { BoxMes } from "../domain/Box;Mes";
 import { BoxAnio } from "../domain/BoxAnio";

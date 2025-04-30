@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { Account } from "../domain/Account";
 import { AccountCodEmpresa } from "../domain/AccountCodEmpresa";
-import { ServiceContainer } from "src/lib/shared/infrastructure/ServiceContainer";
+import { ServiceContainer } from "../../shared/infrastructure/ServiceContainer";
 import { AccountNotFoundError } from "../domain/AccountNotFoundError";
 import { AccountNroDoc } from "../domain/AccountNroDoc";
 

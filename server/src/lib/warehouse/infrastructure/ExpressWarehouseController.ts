@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { WarehouseCodEmpresa } from "../domain/WarehouseCodEmpresa";
-import { ServiceContainer } from "src/lib/shared/infrastructure/ServiceContainer";
+import { ServiceContainer } from "../../shared/infrastructure/ServiceContainer";
 import { WarehouseNotFoundError } from "../domain/WarehouseNotFoundError";
 import { WarehouseCodAlm } from "../domain/WarehouseCodAlm";
 
