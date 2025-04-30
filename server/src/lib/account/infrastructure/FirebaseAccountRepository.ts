@@ -11,7 +11,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { AccountRepository } from "../domain/AccountRepository";
-import { Firebase } from "src/lib/shared/infrastructure/firebase";
+import { Firebase } from "../../shared/infrastructure/firebase";
 import { AccountCodEmpresa } from "../domain/AccountCodEmpresa";
 import { AccountNroCuenta } from "../domain/AccountNroCuenta";
 import { AccountNroDoc } from "../domain/AccountNroDoc";

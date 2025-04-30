@@ -42,6 +42,7 @@ export class InMemoryBoxRepository implements BoxRepository {
 
   async delete(
     codEmpresa: BoxCodEmpresa,
+
     mes: BoxMes,
     anio: BoxAnio
   ): Promise<void> {
