@@ -11,7 +11,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { EnterpriseRepository } from "../domain/EnterpriseRepository";
-import { Firebase } from "src/lib/shared/infrastructure/firebase";
+import { Firebase } from "../../shared/infrastructure/firebase";
 import { Enterprise } from "../domain/Enterprise";
 import { EnterpriseCodEmpresa } from "../domain/EnterpriseCodEmpresa";
 import { EnterpriseRazonSocial } from "../domain/EnterpriseRazonSocial";
