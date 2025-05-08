@@ -7,8 +7,8 @@ import { LoanRepository } from "../domain/LoanRepository";
 export class InMemoryLoanRepository implements LoanRepository {
   private loans: Loan[] = [];
 
-  async create(task: Loan): Promise<void> {
-    this.loans.push(task);
+  async create(loan: Loan): Promise<void> {
+    this.loans.push(loan);
   }
 
   async getAll(codEmpresa: LoanCodEmpresa): Promise<Loan[]> {

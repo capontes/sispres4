@@ -3,5 +3,11 @@ export class CustomerEvaluacion {
 
   constructor(value: string) {
     this.value = value;
+    this.ensureValidate();
+  }
+
+  ensureValidate() {
+    if (this.value.length < 3)
+      throw Error("Estado debe tener al menos 3 caracter");
   }
 }

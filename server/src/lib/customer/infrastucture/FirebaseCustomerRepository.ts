@@ -81,43 +81,43 @@ export class FirebaseCustomerRepository implements CustomerRepository {
   }
 
   async create(customer: Customer): Promise<void> {
-    const id = customer.codEmpresa.value + customer.nroDoc.value;
-    const docRef = doc(this.db, "customers", id);
+    const docRef = doc(this.db, "customers", customer.codEmpresa.value);
     await setDoc(docRef, {
       codEmpresa: customer.codEmpresa.value,
       tipoDoc: customer.tipoDoc.value,
       nroDoc: customer.nroDoc.value,
       nomComercialCli: customer.nomComercialCli.value,
-      razonSocial: customer.razonSocial.value,
-      direccion: customer.direccion.value,
+      razonSocial: customer.RazónSocial.value,
+      direccion: customer.dirección.value,
       phone: customer.phone.value,
-      email: customer.email.value,
+      email: customer.Email.value,
       garante: customer.garante.value,
-      evaluacion: customer.evaluacion.value,
+      evaluacion: customer.evaluación.value,
       tasaInteres: customer.tasaInteres.value,
       tasaMora: customer.tasaMora.value,
       estado: customer.estado.value,
-      garantia: customer.garantia.value,
+      garantia: customer.garantía.value,
       usuario: customer.usuario.value,
       observaciones: customer.observaciones.value,
     });
   }
   async update(customer: Customer): Promise<void> {
-    const id = customer.codEmpresa.value + customer.nroDoc.value;
-    const docRef = doc(this.db, "customers", id);
+    const docRef = doc(this.db, "customers", customer.codEmpresa.value);
     await setDoc(docRef, {
+      codEmpresa: customer.codEmpresa.value,
       tipoDoc: customer.tipoDoc.value,
+      nroDoc: customer.nroDoc.value,
       nomComercialCli: customer.nomComercialCli.value,
-      razonSocial: customer.razonSocial.value,
-      direccion: customer.direccion.value,
+      razonSocial: customer.RazónSocial.value,
+      direccion: customer.dirección.value,
       phone: customer.phone.value,
-      email: customer.email.value,
+      email: customer.Email.value,
       garante: customer.garante.value,
-      evaluacion: customer.evaluacion.value,
+      evaluacion: customer.evaluación.value,
       tasaInteres: customer.tasaInteres.value,
       tasaMora: customer.tasaMora.value,
       estado: customer.estado.value,
-      garantia: customer.garantia.value,
+      garantia: customer.garantía.value,
       usuario: customer.usuario.value,
       observaciones: customer.observaciones.value,
     });

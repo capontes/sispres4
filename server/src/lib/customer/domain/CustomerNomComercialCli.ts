@@ -4,4 +4,6 @@ export class CustomerNomComercialCli {
   constructor(value: string) {
     this.value = value;
   }
+
+ 
 }

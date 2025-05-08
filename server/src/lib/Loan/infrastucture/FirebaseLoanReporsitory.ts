@@ -1,4 +1,3 @@
-import { Firebase } from "../../shared/infrastructure/firebase";
 import {
   collection,
   deleteDoc,
@@ -32,6 +31,7 @@ import { LoanObservaciones } from "../domain/LoanObservaciones";
 import { LoanUsuario } from "../domain/LoanUsuario";
 import { LoanFecCrea } from "../domain/LoanFecCrea";
 import { LoanCuotas } from "../domain/LoanCuotas";
+import { Firebase } from "../../shared/infrastructure/firebase";
 
 type FirebaseLoan = {
   codEmpresa: string;
@@ -134,6 +134,7 @@ export class FirebaseLoanRepository implements LoanRepository {
       })),
     });
   }
+
   async update(loan: Loan): Promise<void> {
     const id = loan.codEmpresa.value + loan.codPrestamo.value;
     const docRef = doc(this.db, "loans", id);
