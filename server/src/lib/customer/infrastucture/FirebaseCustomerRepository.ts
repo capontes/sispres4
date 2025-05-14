@@ -28,6 +28,7 @@ import {
   query,
   setDoc,
   Timestamp,
+  updateDoc,
   where,
 } from "firebase/firestore";
 
@@ -105,7 +106,7 @@ export class FirebaseCustomerRepository implements CustomerRepository {
   async update(customer: Customer): Promise<void> {
     const id = customer.codEmpresa.value + customer.nroDoc.value;
     const docRef = doc(this.db, "customers", id);
-    await setDoc(docRef, {
+    await updateDoc(docRef, {
       tipoDoc: customer.tipoDoc.value,
       nomComercialCli: customer.nomComercialCli.value,
       razonSocial: customer.razonSocial.value,

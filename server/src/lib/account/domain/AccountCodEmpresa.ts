@@ -6,7 +6,6 @@ export class AccountCodEmpresa {
     this.ensureValidate();
   }
   ensureValidate() {
-    console.log(this.value.length);
     if (this.value.length != 3)
       throw Error("Codigo de Empresa debe tener 3 caracteres");
   }

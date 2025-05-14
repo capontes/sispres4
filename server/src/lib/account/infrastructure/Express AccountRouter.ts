@@ -7,9 +7,9 @@ import { ExpressMovementController } from "./ExpressAccountController";
 const controller = new ExpressMovementController();
 const ExpressAccountRouter = Router();
 
-ExpressAccountRouter.get("/accounts/:PayCodEmpresa", controller.getAll);
+ExpressAccountRouter.get("/accounts/:codEmpresa", controller.getAll);
 ExpressAccountRouter.get(
-  "/accounts/:PayCodEmpresa/:nroDoc",
+  "/accounts/:AccountCodEmpresa/:nroDoc",
   controller.getById
 );
 ExpressAccountRouter.post("/accounts/", controller.create);

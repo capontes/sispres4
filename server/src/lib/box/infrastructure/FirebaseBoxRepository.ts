@@ -11,6 +11,7 @@ import {
   setDoc,
   where,
   deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { BoxRepository } from "../domain/BoxRepository";
 import { BoxCodEmpresa } from "../domain/BoxCodEmpresa";
@@ -140,7 +141,37 @@ export class FirebaseBoxRepository implements BoxRepository {
   async update(box: Box): Promise<void> {
     const id = box.codEmpresa.value + box.mes.value + box.anio.value;
     const docRef = doc(this.db, "boxs", id);
-    await deleteDoc(docRef); // deleteDoc only accepts one argument
+    await updateDoc(docRef, {
+      estado: box.estado.value,
+      nroMovimientos: box.nroMovimientos.value,
+      saldoInicial: box.saldoInicial.value,
+      capitalPrestado: box.capitalPrestado.value,
+      capitalCobrado: box.capitalCobrado.value,
+      seguroCobrado: box.seguroCobrado.value,
+      interesCobrado: box.interesCobrado.value,
+      moraCobrado: box.moraCobrado.value,
+      saldoFinal: box.saldoFinal.value,
+      usuApertura: box.usuApertura.value,
+      usuCierra: box.usuCierra.value,
+      fecApertura: new Date(box.fecApertura.value),
+      fecCierre: new Date(box.fecCierre.value),
+      cierreDiario: box.cierreDiario.map((c) => ({
+        dia: c.dia,
+        estadoDia: c.estadoDia, //A=APERTURADO, C=CERRADO
+        nroMovientosDia: c.nroMovientosDia,
+        saldoInicialDia: c.saldoInicialDia,
+        capitalPrestadoDia: c.capitalPrestadoDia,
+        capitalCobradoDia: c.capitalCobradoDia,
+        seguroCobradoDia: c.seguroCobradoDia || 0, // Ensure property exists or provide default
+        interesCobradoDia: c.interesCobradoDia,
+        moraCobradoDia: c.moraCobradoDia,
+        saldoFinalDia: c.saldoFinalDia,
+        usuAperturaDia: c.usuAperturaDia,
+        usuCierraDia: c.usuCierraDia,
+        fecAperturaDia: new Date(c.fecAperturaDia),
+        fecCierreDia: new Date(c.fecCierreDia),
+      })),
+    });
   }
 
   async delete(

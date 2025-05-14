@@ -95,7 +95,7 @@ export class FirebaseMovementRepository implements MovementRepository {
   async update(movement: Movement): Promise<void> {
     const id = movement.codEmpresa.value + movement.nroDoc.value;
     const docRef = doc(this.db, "movements", id);
-    await setDoc(docRef, {
+    await updateDoc(docRef, {
       nroOperacion: movement.nroOperacion.value,
       nroCuenta: movement.nroCuenta.value,
       tipoDoc: movement.tipoDoc.value,

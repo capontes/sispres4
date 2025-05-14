@@ -8,6 +8,7 @@ import {
   getDocs,
   setDoc,
   where,
+  updateDoc,
 } from "firebase/firestore";
 import { WarehouseRepository } from "../domain/WarehouseRepository";
 import { Firebase } from "../../shared/infrastructure/firebase";
@@ -68,7 +69,7 @@ export class FirebaseWarehouseRepository implements WarehouseRepository {
   async update(warehouse: Warehouse): Promise<void> {
     const id = warehouse.codEmpresa.value + warehouse.codAlm.value;
     const docRef = doc(this.db, "warehouse", id);
-    await setDoc(docRef, {
+    await updateDoc(docRef, {
       nomAlmacen: warehouse.nomAlmacen.value,
       direccion: warehouse.direccion.value,
       estado: warehouse.estado.value,

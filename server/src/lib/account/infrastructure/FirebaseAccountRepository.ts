@@ -9,6 +9,7 @@ import {
   setDoc,
   deleteDoc,
   getDocs,
+  updateDoc,
 } from "firebase/firestore";
 import { AccountRepository } from "../domain/AccountRepository";
 import { Firebase } from "../../shared/infrastructure/firebase";
@@ -73,7 +74,7 @@ export class FirebaseAccountRepository implements AccountRepository {
   async getAll(codEmpresa: AccountCodEmpresa): Promise<any[]> {
     const q = query(
       collection(this.db, "accounts"),
-      where("codEmpresa", "==", codEmpresa)
+      where("codEmpresa", "==", codEmpresa.value)
     );
     const result = await getDocs(q);
     const accounts: Account[] = [];
@@ -122,7 +123,7 @@ export class FirebaseAccountRepository implements AccountRepository {
   async update(account: Account): Promise<void> {
     const id = account.codEmpresa.value + account.nroDoc.value;
     const docRef = doc(this.db, "accounts", id);
-    await setDoc(docRef, {
+    await updateDoc(docRef, {
       nroCuenta: account.nroCuenta.value,
       razonSocial: account.razonSocial.value,
       fecApertura: account.fecApertura.value,
