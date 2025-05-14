@@ -4,8 +4,7 @@ import { MovementRepository } from "../../domain/MovementRepository";
 
 export class MovementGetAll {
   constructor(private movementRepository: MovementRepository) {}
-  async run(id: string): Promise<Movement[]> {
-    const movementCodEmpresa = new MovementCodEmpresa(id);
-    return await this.movementRepository.getAll(id);
+  async run(codEmpresa: string, fecMovimiento: string): Promise<Movement[]> {
+    return await this.movementRepository.getAll(codEmpresa, fecMovimiento);
   }
 }

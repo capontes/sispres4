@@ -65,7 +65,7 @@ type FirebasePay = {
 };
 
 export class FirebasePayRepository implements PayRepository {
-  private db: Firestore;
+  db: Firestore;
 
   constructor() {
     this.db = new Firebase().getFirebase();
@@ -106,6 +106,7 @@ export class FirebasePayRepository implements PayRepository {
       where("codEmpresa", "==", codEmpresa.value)
     );
     const result = await getDocs(q);
+    const tasks: PaymentAddress[] = [];
     return result.docs.map((doc): Pay => {
       return this.mapToDomain(doc.data() as FirebasePay);
     });

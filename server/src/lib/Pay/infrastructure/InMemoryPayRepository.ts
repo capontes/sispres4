@@ -11,10 +11,10 @@ export class InMemoryPayRepository implements PayRepository {
   }
 
   async getAll(codEmpresa: PayCodEmpresa): Promise<Pay[]> {
-    const pays = this.pays.filter(
+    const pay = this.pays.filter(
       (pay) => pay.codEmpresa.value === codEmpresa.value
     );
-    return pays;
+    return this.pays;
   }
 
   async getById(id: string): Promise<Pay | null> {

@@ -53,7 +53,7 @@ export class LoanCreate {
       aCapital: number;
     }[]
   ): Promise<void> {
-    const loanLoan = new Loan(
+    const loan = new Loan(
       new LoanCodEmpresa(codEmpresa),
       new LoanCodPrestamo(codPrestamo),
       new LoanNroDoc(nroDoc),
@@ -88,6 +88,6 @@ export class LoanCreate {
           )
       )
     );
-    return await this.loanRepository.create(loanLoan);
+    return await this.loanRepository.create(loan);
   }
 }

@@ -7,8 +7,7 @@ export class CustomerCodEmpresa {
   }
 
   ensureValidate() {
-    console.log(this.value.length);
-    if (this.value.length != 3)
+    if (this.value.length !== 3)
       throw Error("Codido de Empresa debe tener 3 Caracteres");
   }
 }

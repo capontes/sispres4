@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { FirebaseApp, initializeApp } from "firebase/app";
 //import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "firebase/firestore";
+import { Firestore, getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { FirebaseConfig } from "./env";
 
@@ -10,7 +10,8 @@ import { FirebaseConfig } from "./env";
 
 export class Firebase {
   // firebaseConfig: FirebaseApp;
-  firebaseConfig: any;
+  firebaseConfig: FirebaseApp;
+
   constructor() {
     this.firebaseConfig = initializeApp(FirebaseConfig);
   }
@@ -19,7 +20,8 @@ export class Firebase {
   public getFirebase() {
     return getFirestore(this.firebaseConfig);
   }
-  getStorage() {
+
+  public getStorage() {
     return getStorage(this.firebaseConfig);
   }
 }

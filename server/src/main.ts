@@ -9,6 +9,7 @@ import { ExpressWarehouseRouter } from "./lib/warehouse/infrastructure/ExpressWa
 import { ExpressBoxRouter } from "./lib/box/infrastructure/ExpressBoxRouter";
 import { ExpressEnterpriseRouter } from "./lib/enterprise/infrastructure/ExpressEnterpriseRouter";
 import { ExpressLoanRouter } from "./lib/Loan/infrastucture/ExpressLoanRouter";
+import { ExpressVentaRouter } from "./lib/Venta/infrastructure/ExpressVentaRouter";
 
 const app = express();
 app.use(express.json());
@@ -21,6 +22,7 @@ app.use(ExpressAccountRouter);
 app.use(ExpressWarehouseRouter);
 app.use(ExpressBoxRouter);
 app.use(ExpressEnterpriseRouter);
+app.use(ExpressVentaRouter);
 
 app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof Error) {

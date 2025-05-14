@@ -7,8 +7,10 @@ export class ExpressMovementController {
   async getAll(req: Request, res: Response, next: NextFunction) {
     try {
       const codEmpresa = new MovementCodEmpresa(req.params.codEmpresa);
+      const fecMovimiento = new MovementCodEmpresa(req.params.fecMovimiento);
       const movements = await ServiceContainer.movement.getAll.run(
-        codEmpresa.value
+        codEmpresa.value,
+        fecMovimiento.value
       );
       return res
         .json(movements.map((movement) => movement.mapToPrimitives()))

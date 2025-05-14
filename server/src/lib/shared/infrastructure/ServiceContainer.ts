@@ -3,7 +3,7 @@ import { LoanCreate } from "../../Loan/application/LoadCreate/LoanCreate";
 import { LoanDelete } from "../../Loan/application/LoanDelete/LoanDelete";
 import { LoanGetAll } from "../../Loan/application/LoanGetAll/LoanGetAll";
 import { LoanGetById } from "../../Loan/application/LoanGetById/LoanGetById";
-import { LoanUpdate } from "../../Loan/application/LoanUpdate/TaskUpdate";
+import { LoanUpdate } from "../../Loan/application/LoanUpdate/LoanUpdate";
 import { FirebaseLoanRepository } from "../../Loan/infrastucture/FirebaseLoanReporsitory";
 import { InMemoryPayRepository } from "../../Pay/infrastructure/InMemoryPayRepository";
 import { PayGetAll } from "../../Pay/application/PayGetAll/PayGetAll";
@@ -24,11 +24,20 @@ import { CustomerCreate } from "../../customer/application/CustomerCreate/Custom
 import { CustomerUpdate } from "../../customer/application/CustomerUpdate/CustomerUpdate";
 import { CustomerDelete } from "../../customer/application/CustomerDelete/CustomerDelete";
 import { FirebaseCustomerRepository } from "../../customer/infrastucture/FirebaseCustomerRepository";
+import { PersonaGetByDni } from "../../Persona/application/PersonaGetByDni/PersonaGetByDni";
+import { ApisNetPersonaRepository } from "../../Persona/infrastucture/ApisNetPersonaRepository";
+import { FirebaseVentaRepository } from "../../Venta/infrastructure/FirebaseVentaRepository";
+import { VentaGetAll } from "../../Venta/application/VentaGetAll/VentaGetAll";
+import { VentaGetById } from "../../Venta/application/VentaGetById/VentaGetById";
+import { VentaCreate } from "../../Venta/application/VentaCreate/VentaCreate";
+import { VentaUpdate } from "../../Venta/application/VentaUpdate/VentaUpdate";
+import { InMemoryVentaRepository } from "../../Venta/infrastructure/InMemoryVentaRepository";
+import { InMemoryTaskRepository } from "../../Task/infrastructure/InMemoryTaskReporsitory";
 import { MovementGetAll } from "../../movement/application/MovementGetAll/MovementGetAll";
 import { MovementGetById } from "../../movement/application/MovementGetById/MovementGetById";
 import { MovementCreate } from "../../movement/application/MovementCreate/MovementCreate";
-import { MovementDelete } from "../../movement/application/MovementDelete/MovementDelete";
 import { MovementUpdate } from "../../movement/application/MovementUpdate/MovementUpdate";
+import { MovementDelete } from "../../movement/application/MovementDelete/MovementDelete";
 import { FirebaseMovementRepository } from "../../movement/infrastructure/FirebaseMovementRepository";
 import { Account } from "../../account/domain/Account";
 import { AccountGetAll } from "../../account/application/accountGetAll/AccountGetAll";
@@ -57,12 +66,16 @@ import { EnterpriseUpdate } from "../../enterprise/application/EnterpriseUpdate/
 import { EnterpriseDelete } from "../../enterprise/application/EnterpriseDelete/EnterpriseDelete";
 import { FirebaseEnterpriseRepository } from "../../enterprise/infrastructure/FirebaseEnterpriseRepository";
 
-const loanRepository = new FirebaseLoanRepository();
-//const loanRepository = new InMemoryLoanRepository();
+// const loanRepository = new FirebaseLoanRepository();
+const loanRepository = new InMemoryLoanRepository();
 //  const payRepository = new InMemoryPayRepository();
 const payRepository = new FirebasePayRepository();
-const taskRepository = new FirebaseTaskRepository();
+const taskRepository = new InMemoryTaskRepository();
+// const taskRepository = new FirebaseTaskRepository();
 const customerRepository = new FirebaseCustomerRepository();
+const personaRepository = new ApisNetPersonaRepository();
+const ventaRepository = new FirebaseVentaRepository();
+// const ventaRepository = new InMemoryVentaRepository();
 const movementRepository = new FirebaseMovementRepository();
 const accountRepository = new FirebaseAccountRepository();
 const warehouseRepository = new FirebaseWarehouseRepository();
@@ -70,6 +83,7 @@ const boxRepository = new FirebaseBoxRepository();
 const emterpriseRepository = new FirebaseEnterpriseRepository();
 
 export const ServiceContainer = {
+  persona: { getByDni: new PersonaGetByDni(personaRepository) },
   loan: {
     getAll: new LoanGetAll(loanRepository),
     getById: new LoanGetById(loanRepository),
@@ -97,6 +111,12 @@ export const ServiceContainer = {
     create: new CustomerCreate(customerRepository),
     update: new CustomerUpdate(customerRepository),
     delete: new CustomerDelete(customerRepository),
+  },
+  venta: {
+    getAll: new VentaGetAll(ventaRepository),
+    getById: new VentaGetById(ventaRepository),
+    create: new VentaCreate(ventaRepository),
+    update: new VentaUpdate(ventaRepository),
   },
   movement: {
     getAll: new MovementGetAll(movementRepository),
