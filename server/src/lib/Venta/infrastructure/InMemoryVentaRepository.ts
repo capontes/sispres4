@@ -24,7 +24,7 @@ export class InMemoryVentaRepository implements VentaRepository {
   }
 
   async getById(id: VentaId): Promise<Venta | null> {
-    const venta = this.ventas.find((venta) => venta.id === id.value);
+    const venta = this.ventas.find((venta) => venta.id.value === id.value);
     return venta || null;
   }
 

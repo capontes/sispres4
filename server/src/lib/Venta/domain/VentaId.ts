@@ -7,9 +7,9 @@ export class VentaId {
   }
 
   ensureValues() {
-    if (this.value.length != 15)
+    if (this.value.length != 17)
       throw new Error(
-        "Id debe ser de 15 caracteres <CodEmpre*3><Serie*4><NroDoc*8>"
+        "Id debe ser de 15 caracteres <CodEmpre*3><CodTipDoc*2><Serie*4><NroDoc*8>"
       );
   }
 }
