@@ -1,7 +1,24 @@
 export class VentaDetraccion {
-  value: boolean;
+  codigo: string;
+  porcentaje: number;
+  monto: number;
+  codMetodoPago: string;
+  cuentaBancaria: string;
+  NombreCuentaBancaria: string;
 
-  constructor(value: boolean) {
-    this.value = value;
+  constructor(
+    codigo: string,
+    porcentaje: number,
+    monto: number,
+    codMetodoPago: string,
+    cuentaBancaria: string,
+    NombreCuentaBancaria: string
+  ) {
+    this.codigo = codigo;
+    this.porcentaje = porcentaje;
+    this.monto = monto;
+    this.codMetodoPago = codMetodoPago;
+    this.cuentaBancaria = cuentaBancaria;
+    this.NombreCuentaBancaria = NombreCuentaBancaria;
   }
 }

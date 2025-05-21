@@ -103,15 +103,9 @@ export class FirebaseCustomerRepository implements CustomerRepository {
     });
   }
   async update(customer: Customer): Promise<void> {
-<<<<<<< HEAD
     const id = customer.codEmpresa.value + customer.nroDoc.value;
     const docRef = doc(this.db, "customers", id);
     await updateDoc(docRef, {
-=======
-    const docRef = doc(this.db, "customers", customer.codEmpresa.value);
-    await setDoc(docRef, {
-      codEmpresa: customer.codEmpresa.value,
->>>>>>> 3f95933c8db9e3fc0c2561e0b26b65e0e0782ae8
       tipoDoc: customer.tipoDoc.value,
       nroDoc: customer.nroDoc.value,
       nomComercialCli: customer.nomComercialCli.value,

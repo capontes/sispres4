@@ -15,137 +15,115 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { VentaCancelado } from "../domain/VentaCancelado";
 import { VentaCodMoneda } from "../domain/VentaCodMoneda";
-import { VentaCodProDetraccion } from "../domain/VentaCodProDetraccion";
-import { VentaCodTipDocAnticipo } from "../domain/VentaCodTipDocAnticipo";
-import { VentaCodTipDocCliAnticipo } from "../domain/VentaCodTipDocCliAnticipo";
-import { VentaCodTipDocRef } from "../domain/VentaCodTipDocRef";
-import { VentaCodTipDocVenta } from "../domain/VentaCodTipDocVenta";
-import { VentaCodTipGuiaRemision } from "../domain/VentaCodTipGuiaRemision";
 import { VentaCodTipOperacion } from "../domain/VentaCodTipOperacion";
-import { VentaDetraccion } from "../domain/VentaDetraccion";
-import { VentaDireccion } from "../domain/VentaDireccion";
-import { VentaEmail } from "../domain/VentaEmail";
-import { VentaEnvioAutoSunat } from "../domain/VentaEnvioAutoSunat";
-import { VentaFactorDetraccion } from "../domain/VentaFactorDetraccion";
-import { VentaFecVence } from "../domain/VentaFecVence";
 import { VentaFormaPago } from "../domain/VentaFormaPago";
-import { VentaImporteAnticipo } from "../domain/VentaImporteAnticipo";
-import { VentaImporteAnticipos } from "../domain/VentaImporteAnticipos";
-import { VentaImporteCobrar } from "../domain/VentaImporteCobrar";
-import { VentaImporteDescuentos } from "../domain/VentaImporteDescuentos";
-import { VentaImporteDescuentosGlobales } from "../domain/VentaImporteDescuentosGlobales";
-import { VentaImporteDetracion } from "../domain/VentaImporteDetracion";
-import { VentaImporteICBPER } from "../domain/VentaImporteICBPER";
-import { VentaImporteIgv } from "../domain/VentaImporteIgv";
-import { VentaImporteIsc } from "../domain/VentaImporteIsc";
-import { VentaImporteOtros } from "../domain/VentaImporteOtros";
-import { VentaImportePercepcion } from "../domain/VentaImportePercepcion";
-import { VentaImporteSubTotal } from "../domain/VentaImporteSubTotal";
-import { VentaImporteTotal } from "../domain/VentaImporteTotal";
-import { VentaImporteTotalTexto } from "../domain/VentaImporteTotalTexto";
-import { VentaImporteValorVenta } from "../domain/VentaImporteValorVenta";
-import { VentaNomComercialCli } from "../domain/VentaNomComercialCli";
-import { VentaNroDocAnticipo } from "../domain/VentaNroDocAnticipo";
-import { VentaNroDocCli } from "../domain/VentaNroDocCli";
-import { VentaNroDocRef } from "../domain/VentaNroDocRef";
-import { VentaNroDocuVenta } from "../domain/VentaNroDocuVenta";
-import { VentaNroGuiaRemision } from "../domain/VentaNroGuiaRemision";
 import { VentaNroOrdenCompra } from "../domain/VentaNroOrdenCompra";
 import { VentaObservaciones } from "../domain/VentaObservaciones";
-import { VentaPhone } from "../domain/VentaPhone";
-import { VentaRazonSocial } from "../domain/VentaRazonSocial";
-import { VentaSerieDocAnticipo } from "../domain/VentaSerieDocAnticipo";
-import { VentaSerieDocuVenta } from "../domain/VentaSerieDocuVenta";
-import { VentaSimboloMoneda } from "../domain/VentaSimboloMoneda";
-import { VentaTipDocCli } from "../domain/VentaTipDocCli";
-import { VentaTipoCambio } from "../domain/VentaTipoCambio";
-import { VentaAgentePercepcion } from "../domain/VentaAgentePercepcion";
-import { VentaDetalles } from "../domain/VentaDetalles";
+import { VentaCliente } from "../domain/VentaCliente";
+import { VentaDatosTransporteCarga } from "../domain/VentaDatosTransporteCarga";
+import { VentaAnticipo } from "../domain/VentaAnticipo";
+import { VentaTotales } from "../domain/VentaTotales";
+import { VentaDetraccion } from "../domain/VentaDetraccion";
+import { VentaTerminosPago } from "../domain/VentaTerminosPago";
+import { VentaCuotasCredito } from "../domain/VentaCuotasCredito";
+import { VentaCodTipDoc } from "../domain/VentaCodTipDoc";
+import { VentaSerieDoc } from "../domain/VentaSerieDoc";
+import { VentaNroDoc } from "../domain/VentaNroDoc";
+import { VentaFecVencimiento } from "../domain/VentaFecVencimiento";
+import { VentaHoraEmision } from "../domain/VentaHoraEmision";
+import { VentaFactorTax } from "../domain/VentaFactorTax";
+import { VentaEnvioAutoCli } from "../domain/VentaEnvioAutoCli";
+import { VentaCodEstablecimientoEmisor } from "../domain/VentaCodEstablecimientoEmisor";
+import { VentaItem } from "../domain/VentaItem";
 
 type FirebaseVenta = {
   codEmpresa: string;
-  codTipDocVenta: string;
-  serieDocuVenta: string;
-  nroDocuVenta: string;
-  tipDocCli: string;
-  nroDocCli: string; //Ruc; dni; ce
-  nomComercialCli: string;
-  razonSocial: string;
-  direccion: string;
-  phone: string;
-  email: string;
+  codTipDoc: string;
+  serieDoc: string;
+  nroDoc: string;
+  CodTipOperacion: string;
   fecEmision: string;
-  fecVence: string;
+  fecVencimiento: string;
+  horaEmision: string;
   codMoneda: string;
-  simboloMoneda: string;
-  tipoCambio: number;
-  codTipOperacion: string;
-  cancelado: boolean;
-  formaPago: string;
-  envioAutoSunat: boolean;
-  observaciones: string;
-  agentePercepcion: boolean;
-  detraccion: boolean;
-  codProDetraccion: string;
-  factorDetraccion: number;
-  importeDetracion: number;
-  importeSubTotal: number;
-  importeDescuentosGlobales: number;
-  importeDescuentos: number;
-  importeOtros: number;
-  importeAnticipos: number;
-  importeValorVenta: number;
-  importeIsc: number;
-  importeIgv: number;
-  importeICBPER: number;
-  importePercepcion: number;
-  importeTotal: number;
-  importeCobrar: number;
-  importeTotalTexto: string;
+  factorTax: number;
+  envioAutoCli: boolean;
+  formaPAgo: string;
   nroOrdenCompra: string;
-  codTipGuiaRemision: string;
-  nroGuiaRemision: string;
-  codTipDocRef: string;
-  nroDocRef: string;
-  codTipDocAnticipo: string;
-  serieDocAnticipo: string;
-  nroDocAnticipo: string;
-  codTipDocCliAnticipo: string; //catalogo06
-  importeAnticipo: number;
-  detalles: {
-    item: number;
-    codProducto: number;
-    codProductoSunat: string;
-    nombrePro: string;
-    unidad: string;
-    cantidad: string;
-    codTipPrecio: string; //01=onerosa; 02=no onerosa(gratuito)
-    precioSugerido: number; //valor unitario (sin descuentos ni impuestos)
-    valorUnitario: number; //valor unitario (sin descuentos ni impuestos)
-    subTotal: number;
-    ChargeIndicator: boolean; //false=descuento; true=cargo
-    codDescuento: string; //00=Descuentos que afectan el IGV/IVAP; 50=cargos
-    factorDescuento: number;
-    descuento: number;
-    valorVenta: number;
-    codTributo: string; //1000 IGV;   2000 ISC; 9999 otros
-    nombreTributo: string;
-    catImpuestos: string; //"E=Exonedado; O=Inafecto; S=IGV";
-    codInterTributo: string;
-    codTipoAfectacionIgv: string;
-    factorIgv: number;
-    igv: number;
-    indIgv: number; //condición si debe llevar o no igv
-    aplicaICBPER: boolean; // si; no
-    factorICBPER: string;
-    importeICBPER: number;
-    precio: number; //Precio Unitario
-    codTipSistemaIsc: string; //01 al valor; 02 al volumen; 03 al precio de venta al publico
-    factorIsc: number;
-    isc: number;
+  codEstablecimientoEmisor: string;
+  cliente: {
+    tipDoc: string;
+    nroDoc: string;
+    nomComercial: string;
+    razonSocial: string;
+    codPais: string;
+    ubigeo: string;
+    direccion: string;
+    email: string;
+    phone: string;
+  };
+  datosTransporteCarga: {
+    ubigeoOrigen: string;
+    direccionOrigen: string;
+    ubigeo_destino: string;
+    direccionDestino: string;
+    valorRefServicioTransporte: string;
+    valorReferencialCargaEfectiva: string;
+    valorReferencialCargaUtil: string;
+    detalleViaje: string;
+  };
+  anticipos: {
+    codTipoDoc: string;
+    serie: string;
+    numero: string;
     total: number;
+  }[];
+  totales: {
+    exportacion: number;
+    gravadas: number;
+    inafectas: number;
+    exoneradas: number;
+    gratuitas: number;
+    Otros: number;
+    tax: number;
+    venta: number;
+    anticipos: number;
+    retencion: number;
+    codRetencion: number;
+    descuentos: {
+      codigo: string;
+      descripcion: string;
+      porcentaje: number;
+      monto: number;
+      base: number;
+    };
+  };
+  detraccion: {
+    codigo: string;
+    porcentaje: number;
+    monto: number;
+    codMetodoPago: string;
+    cuentaBancaria: string;
+    NombreCuentaBancaria: string;
+  };
+  terminosPago: { descripcion: String; tipo: String };
+  cuotasCredito: { cuota: string; fechaPago: string; importe: number }[];
+  observaciones: string;
+  items: {
+    item: number;
+    unidad: string;
+    codigo: string;
+    descripcion: string;
+    codigoProductoSunat: string;
+    codigoProductoGsl: string;
+    cantidad: string;
+    valorUnitario: string;
+    precioUnitario: string;
+    tipoTax: string;
+    totalBaseTax: string;
+    totalTax: string;
+    total: string;
   }[];
 };
 
@@ -181,176 +159,190 @@ export class FirebaseVentaRepository implements VentaRepository {
   }
 
   async create(venta: Venta): Promise<void> {
-    const docRef = doc(this.db, "ventas", venta.id);
+    const docRef = doc(this.db, "ventas", venta.id.value);
     await setDoc(docRef, {
       codEmpresa: venta.codEmpresa.value,
-      codTipDocVenta: venta.codTipDocVenta.value,
-      serieDocuVenta: venta.serieDocuVenta.value,
-      nroDocuVenta: venta.nroDocuVenta.value,
-      tipDocCli: venta.tipDocCli.value,
-      nroDocCli: venta.nroDocCli.value, //Ruc; dni; ce
-      nomComercialCli: venta.nomComercialCli.value,
-      razonSocial: venta.razonSocial.value,
-      direccion: venta.direccion.value,
-      phone: venta.phone.value,
-      email: venta.email.value,
+      codTipDoc: venta.codTipDoc.value,
+      serieDoc: venta.serieDoc.value,
+      nroDoc: venta.nroDoc.value,
+      CodTipOperacion: venta.CodTipOperacion.value,
       fecEmision: venta.fecEmision.value,
-      fecVence: venta.fecVence.value,
+      fecVencimiento: venta.fecVencimiento.value,
+      horaEmision: venta.horaEmision.value,
       codMoneda: venta.codMoneda.value,
-      simboloMoneda: venta.simboloMoneda.value,
-      tipoCambio: venta.tipoCambio.value,
-      codTipOperacion: venta.codTipOperacion.value,
-      cancelado: venta.cancelado.value,
-      formaPago: venta.formaPago.value,
-      envioAutoSunat: venta.envioAutoSunat.value,
-      observaciones: venta.observaciones.value,
-      agentePercepcion: venta.agentePercepcion.value,
-      detraccion: venta.detraccion.value,
-      codProDetraccion: venta.codProDetraccion.value,
-      factorDetraccion: venta.factorDetraccion.value,
-      importeDetracion: venta.importeDetracion.value,
-      importeSubTotal: venta.importeSubTotal.value,
-      importeDescuentosGlobales: venta.importeDescuentosGlobales.value,
-      importeDescuentos: venta.importeDescuentos.value,
-      importeOtros: venta.importeOtros.value,
-      importeAnticipos: venta.importeAnticipos.value,
-      importeValorVenta: venta.importeValorVenta.value,
-      importeIsc: venta.importeIsc.value,
-      importeIgv: venta.importeIgv.value,
-      importeICBPER: venta.importeICBPER.value,
-      importePercepcion: venta.importePercepcion.value,
-      importeTotal: venta.importeTotal.value,
-      importeCobrar: venta.importeCobrar.value,
-      importeTotalTexto: venta.importeTotalTexto.value,
+      factorTax: venta.factorTax.value,
+      envioAutoCli: venta.envioAutoCli.value,
+      formaPAgo: venta.formaPAgo.value,
       nroOrdenCompra: venta.nroOrdenCompra.value,
-      codTipGuiaRemision: venta.codTipGuiaRemision.value,
-      nroGuiaRemision: venta.nroGuiaRemision.value,
-      codTipDocRef: venta.codTipDocRef.value,
-      nroDocRef: venta.nroDocRef.value,
-      codTipDocAnticipo: venta.codTipDocAnticipo.value,
-      serieDocAnticipo: venta.serieDocAnticipo.value,
-      nroDocAnticipo: venta.nroDocAnticipo.value,
-      codTipDocCliAnticipo: venta.codTipDocCliAnticipo.value, //catalogo06
-      importeAnticipo: venta.importeAnticipo.value,
-      detalles: venta.detalles.map((c) => ({
+      codEstablecimientoEmisor: venta.codEstablecimientoEmisor.value,
+      cliente: {
+        tipDoc: venta.cliente.tipDoc,
+        nroDoc: venta.cliente.nroDoc,
+        nomComercial: venta.cliente.nomComercial,
+        razonSocial: venta.cliente.razonSocial,
+        codPais: venta.cliente.codPais,
+        ubigeo: venta.cliente.ubigeo,
+        direccion: venta.cliente.direccion,
+        email: venta.cliente.email,
+        phone: venta.cliente.phone,
+      },
+      datosTransporteCarga: {
+        ubigeoOrigen: venta.datosTransporteCarga.ubigeoOrigen,
+        direccionOrigen: venta.datosTransporteCarga.direccionOrigen,
+        ubigeo_destino: venta.datosTransporteCarga.ubigeo_destino,
+        direccionDestino: venta.datosTransporteCarga.direccionDestino,
+        valorRefServicioTransporte:
+          venta.datosTransporteCarga.valorRefServicioTransporte,
+        valorReferencialCargaEfectiva:
+          venta.datosTransporteCarga.valorReferencialCargaEfectiva,
+        valorReferencialCargaUtil:
+          venta.datosTransporteCarga.valorReferencialCargaUtil,
+        detalleViaje: venta.datosTransporteCarga.detalleViaje,
+      },
+      anticipos: venta.anticipos.map((c) => ({
+        codTipoDoc: c.codTipoDoc,
+        serie: c.serie,
+        numero: c.numero,
+        total: c.total,
+      })),
+      totales: {
+        exportacion: venta.totales.exportacion,
+        gravadas: venta.totales.gravadas,
+        inafectas: venta.totales.inafectas,
+        exoneradas: venta.totales.exoneradas,
+        gratuitas: venta.totales.gratuitas,
+        Otros: venta.totales.Otros,
+        tax: venta.totales.tax,
+        venta: venta.totales.venta,
+        anticipos: venta.totales.anticipos,
+        retencion: venta.totales.retencion,
+        codRetencion: venta.totales.codRetencion,
+        descuentos: venta.totales.descuentos,
+      },
+      detraccion: {
+        codigo: venta.detraccion.codigo,
+        porcentaje: venta.detraccion.porcentaje,
+        monto: venta.detraccion.monto,
+        codMetodoPago: venta.detraccion.codMetodoPago,
+        cuentaBancaria: venta.detraccion.cuentaBancaria,
+        NombreCuentaBancaria: venta.detraccion.NombreCuentaBancaria,
+      },
+      terminosPago: {
+        descripcion: venta.terminosPago.descripcion,
+        tipo: venta.terminosPago.tipo,
+      },
+      cuotasCredito: venta.cuotasCredito.map((c) => ({
+        cuota: c.cuota,
+        fechaPago: c.fechaPago,
+        importe: c.importe,
+      })),
+      observaciones: venta.observaciones.value,
+      items: venta.items.map((c) => ({
         item: c.item,
-        codProducto: c.codProducto,
-        codProductoSunat: c.codProductoSunat,
-        nombrePro: c.nombrePro,
         unidad: c.unidad,
+        codigo: c.codigo,
+        descripcion: c.descripcion,
+        codigoProductoSunat: c.codigoProductoSunat,
+        codigoProductoGsl: c.codigoProductoGsl,
         cantidad: c.cantidad,
-        codTipPrecio: c.codTipPrecio, //01=onerosa; 02=no onerosa(gratuito)
-        precioSugerido: c.precioSugerido, //valor unitario (sin descuentos ni impuestos)
-        valorUnitario: c.valorUnitario, //valor unitario (sin descuentos ni impuestos)
-        subTotal: c.subTotal,
-        ChargeIndicator: c.ChargeIndicator, //false=descuento; true=cargo
-        codDescuento: c.codDescuento, //00=Descuentos que afectan el IGV/IVAP; 50=cargos
-        factorDescuento: c.factorDescuento,
-        descuento: c.descuento,
-        valorVenta: c.valorVenta,
-        codTributo: c.codTributo, //1000 IGV;   2000 ISC; 9999 otros
-        nombreTributo: c.nombreTributo,
-        catImpuestos: c.catImpuestos, //"E=Exonedado; O=Inafecto; S=IGV";
-        codInterTributo: c.codInterTributo,
-        codTipoAfectacionIgv: c.codTipoAfectacionIgv,
-        factorIgv: c.factorIgv,
-        igv: c.igv,
-        indIgv: c.indIgv, //condición si debe llevar o no igv
-        aplicaICBPER: c.aplicaICBPER, // si; no
-        factorICBPER: c.factorICBPER,
-        importeICBPER: c.importeICBPER,
-        precio: c.precio, //Precio Unitario
-        codTipSistemaIsc: c.codTipSistemaIsc, //01 al valor; 02 al volumen; 03 al precio de venta al publico
-        factorIsc: c.factorIsc,
-        isc: c.isc,
+        valorUnitario: c.valorUnitario,
+        precioUnitario: c.precioUnitario,
+        tipoTax: c.tipoTax,
+        totalBaseTax: c.totalBaseTax,
+        totalTax: c.totalTax,
         total: c.total,
       })),
     });
   }
 
   async update(venta: Venta): Promise<void> {
-    const docRef = doc(this.db, "ventas", venta.id);
+    const docRef = doc(this.db, "ventas", venta.id.value);
     await updateDoc(docRef, {
-      // codEmpresa: venta.codEmpresa.value,
-      // codTipDocVenta: venta.codTipDocVenta.value,
-      // serieDocuVenta: venta.serieDocuVenta.value,
-      // nroDocuVenta: venta.nroDocuVenta.value,
-      tipDocCli: venta.tipDocCli.value,
-      nroDocCli: venta.nroDocCli.value, //Ruc; dni; ce
-      nomComercialCli: venta.nomComercialCli.value,
-      razonSocial: venta.razonSocial.value,
-      direccion: venta.direccion.value,
-      phone: venta.phone.value,
-      email: venta.email.value,
+      CodTipOperacion: venta.CodTipOperacion.value,
       fecEmision: venta.fecEmision.value,
-      fecVence: venta.fecVence.value,
+      fecVencimiento: venta.fecVencimiento.value,
+      horaEmision: venta.horaEmision.value,
       codMoneda: venta.codMoneda.value,
-      simboloMoneda: venta.simboloMoneda.value,
-      tipoCambio: venta.tipoCambio.value,
-      codTipOperacion: venta.codTipOperacion.value,
-      cancelado: venta.cancelado.value,
-      formaPago: venta.formaPago.value,
-      envioAutoSunat: venta.envioAutoSunat.value,
-      observaciones: venta.observaciones.value,
-      agentePercepcion: venta.agentePercepcion.value,
-      detraccion: venta.detraccion.value,
-      codProDetraccion: venta.codProDetraccion.value,
-      factorDetraccion: venta.factorDetraccion.value,
-      importeDetracion: venta.importeDetracion.value,
-      importeSubTotal: venta.importeSubTotal.value,
-      importeDescuentosGlobales: venta.importeDescuentosGlobales.value,
-      importeDescuentos: venta.importeDescuentos.value,
-      importeOtros: venta.importeOtros.value,
-      importeAnticipos: venta.importeAnticipos.value,
-      importeValorVenta: venta.importeValorVenta.value,
-      importeIsc: venta.importeIsc.value,
-      importeIgv: venta.importeIgv.value,
-      importeICBPER: venta.importeICBPER.value,
-      importePercepcion: venta.importePercepcion.value,
-      importeTotal: venta.importeTotal.value,
-      importeCobrar: venta.importeCobrar.value,
-      importeTotalTexto: venta.importeTotalTexto.value,
+      factorTax: venta.factorTax.value,
+      envioAutoCli: venta.envioAutoCli.value,
+      formaPAgo: venta.formaPAgo.value,
       nroOrdenCompra: venta.nroOrdenCompra.value,
-      codTipGuiaRemision: venta.codTipGuiaRemision.value,
-      nroGuiaRemision: venta.nroGuiaRemision.value,
-      codTipDocRef: venta.codTipDocRef.value,
-      nroDocRef: venta.nroDocRef.value,
-      codTipDocAnticipo: venta.codTipDocAnticipo.value,
-      serieDocAnticipo: venta.serieDocAnticipo.value,
-      nroDocAnticipo: venta.nroDocAnticipo.value,
-      codTipDocCliAnticipo: venta.codTipDocCliAnticipo.value, //catalogo06
-      importeAnticipo: venta.importeAnticipo.value,
-      detalles: venta.detalles.map((c) => ({
+      codEstablecimientoEmisor: venta.codEstablecimientoEmisor.value,
+      cliente: {
+        tipDoc: venta.cliente.tipDoc,
+        nroDoc: venta.cliente.nroDoc,
+        nomComercial: venta.cliente.nomComercial,
+        razonSocial: venta.cliente.razonSocial,
+        codPais: venta.cliente.codPais,
+        ubigeo: venta.cliente.ubigeo,
+        direccion: venta.cliente.direccion,
+        email: venta.cliente.email,
+        phone: venta.cliente.phone,
+      },
+      datosTransporteCarga: {
+        ubigeoOrigen: venta.datosTransporteCarga.ubigeoOrigen,
+        direccionOrigen: venta.datosTransporteCarga.direccionOrigen,
+        ubigeo_destino: venta.datosTransporteCarga.ubigeo_destino,
+        direccionDestino: venta.datosTransporteCarga.direccionDestino,
+        valorRefServicioTransporte:
+          venta.datosTransporteCarga.valorRefServicioTransporte,
+        valorReferencialCargaEfectiva:
+          venta.datosTransporteCarga.valorReferencialCargaEfectiva,
+        valorReferencialCargaUtil:
+          venta.datosTransporteCarga.valorReferencialCargaUtil,
+        detalleViaje: venta.datosTransporteCarga.detalleViaje,
+      },
+      anticipos: venta.anticipos.map((c) => ({
+        codTipoDoc: c.codTipoDoc,
+        serie: c.serie,
+        numero: c.numero,
+        total: c.total,
+      })),
+      totales: {
+        exportacion: venta.totales.exportacion,
+        gravadas: venta.totales.gravadas,
+        inafectas: venta.totales.inafectas,
+        exoneradas: venta.totales.exoneradas,
+        gratuitas: venta.totales.gratuitas,
+        Otros: venta.totales.Otros,
+        tax: venta.totales.tax,
+        venta: venta.totales.venta,
+        anticipos: venta.totales.anticipos,
+        retencion: venta.totales.retencion,
+        codRetencion: venta.totales.codRetencion,
+        descuentos: venta.totales.descuentos,
+      },
+      detraccion: {
+        codigo: venta.detraccion.codigo,
+        porcentaje: venta.detraccion.porcentaje,
+        monto: venta.detraccion.monto,
+        codMetodoPago: venta.detraccion.codMetodoPago,
+        cuentaBancaria: venta.detraccion.cuentaBancaria,
+        NombreCuentaBancaria: venta.detraccion.NombreCuentaBancaria,
+      },
+      terminosPago: {
+        descripcion: venta.terminosPago.descripcion,
+        tipo: venta.terminosPago.tipo,
+      },
+      cuotasCredito: venta.cuotasCredito.map((c) => ({
+        cuota: c.cuota,
+        fechaPago: c.fechaPago,
+        importe: c.importe,
+      })),
+      observaciones: venta.observaciones.value,
+      items: venta.items.map((c) => ({
         item: c.item,
-        codProducto: c.codProducto,
-        codProductoSunat: c.codProductoSunat,
-        nombrePro: c.nombrePro,
         unidad: c.unidad,
+        codigo: c.codigo,
+        descripcion: c.descripcion,
+        codigoProductoSunat: c.codigoProductoSunat,
+        codigoProductoGsl: c.codigoProductoGsl,
         cantidad: c.cantidad,
-        codTipPrecio: c.codTipPrecio, //01=onerosa; 02=no onerosa(gratuito)
-        precioSugerido: c.precioSugerido, //valor unitario (sin descuentos ni impuestos)
-        valorUnitario: c.valorUnitario, //valor unitario (sin descuentos ni impuestos)
-        subTotal: c.subTotal,
-        ChargeIndicator: c.ChargeIndicator, //false=descuento; true=cargo
-        codDescuento: c.codDescuento, //00=Descuentos que afectan el IGV/IVAP; 50=cargos
-        factorDescuento: c.factorDescuento,
-        descuento: c.descuento,
-        valorVenta: c.valorVenta,
-        codTributo: c.codTributo, //1000 IGV;   2000 ISC; 9999 otros
-        nombreTributo: c.nombreTributo,
-        catImpuestos: c.catImpuestos, //"E=Exonedado; O=Inafecto; S=IGV";
-        codInterTributo: c.codInterTributo,
-        codTipoAfectacionIgv: c.codTipoAfectacionIgv,
-        factorIgv: c.factorIgv,
-        igv: c.igv,
-        indIgv: c.indIgv, //condición si debe llevar o no igv
-        aplicaICBPER: c.aplicaICBPER, // si; no
-        factorICBPER: c.factorICBPER,
-        importeICBPER: c.importeICBPER,
-        precio: c.precio, //Precio Unitario
-        codTipSistemaIsc: c.codTipSistemaIsc, //01 al valor; 02 al volumen; 03 al precio de venta al publico
-        factorIsc: c.factorIsc,
-        isc: c.isc,
+        valorUnitario: c.valorUnitario,
+        precioUnitario: c.precioUnitario,
+        tipoTax: c.tipoTax,
+        totalBaseTax: c.totalBaseTax,
+        totalTax: c.totalTax,
         total: c.total,
       })),
     });
@@ -359,87 +351,88 @@ export class FirebaseVentaRepository implements VentaRepository {
   private mapToDomain(venta: FirebaseVenta): Venta {
     return new Venta(
       new VentaCodEmpresa(venta.codEmpresa),
-      new VentaCodTipDocVenta(venta.codTipDocVenta),
-      new VentaSerieDocuVenta(venta.serieDocuVenta),
-      new VentaNroDocuVenta(venta.nroDocuVenta),
-      new VentaTipDocCli(venta.tipDocCli),
-      new VentaNroDocCli(venta.nroDocCli), //Ruc; dni; ce
-      new VentaNomComercialCli(venta.nomComercialCli),
-      new VentaRazonSocial(venta.razonSocial),
-      new VentaDireccion(venta.direccion),
-      new VentaPhone(venta.phone),
-      new VentaEmail(venta.email),
+      new VentaCodTipDoc(venta.codTipDoc),
+      new VentaSerieDoc(venta.serieDoc),
+      new VentaNroDoc(venta.nroDoc),
+      new VentaCodTipOperacion(venta.CodTipOperacion),
       new VentaFecEmision(venta.fecEmision),
-      new VentaFecVence(venta.fecVence),
+      new VentaFecVencimiento(venta.fecVencimiento),
+      new VentaHoraEmision(venta.horaEmision),
       new VentaCodMoneda(venta.codMoneda),
-      new VentaSimboloMoneda(venta.simboloMoneda),
-      new VentaTipoCambio(venta.tipoCambio),
-      new VentaCodTipOperacion(venta.codTipOperacion),
-      new VentaCancelado(venta.cancelado),
-      new VentaFormaPago(venta.formaPago),
-      new VentaEnvioAutoSunat(venta.envioAutoSunat),
-      new VentaObservaciones(venta.observaciones),
-      new VentaAgentePercepcion(venta.agentePercepcion),
-      new VentaDetraccion(venta.detraccion),
-      new VentaCodProDetraccion(venta.codProDetraccion),
-      new VentaFactorDetraccion(venta.factorDetraccion),
-      new VentaImporteDetracion(venta.importeDetracion),
-      new VentaImporteSubTotal(venta.importeSubTotal),
-      new VentaImporteDescuentosGlobales(venta.importeDescuentosGlobales),
-      new VentaImporteDescuentos(venta.importeDescuentos),
-      new VentaImporteOtros(venta.importeOtros),
-      new VentaImporteAnticipos(venta.importeAnticipos),
-      new VentaImporteValorVenta(venta.importeValorVenta),
-      new VentaImporteIsc(venta.importeIsc),
-      new VentaImporteIgv(venta.importeIgv),
-      new VentaImporteICBPER(venta.importeICBPER),
-      new VentaImportePercepcion(venta.importePercepcion),
-      new VentaImporteTotal(venta.importeTotal),
-      new VentaImporteCobrar(venta.importeCobrar),
-      new VentaImporteTotalTexto(venta.importeTotalTexto),
+      new VentaFactorTax(venta.factorTax),
+      new VentaEnvioAutoCli(venta.envioAutoCli),
+      new VentaFormaPago(venta.formaPAgo),
       new VentaNroOrdenCompra(venta.nroOrdenCompra),
-      new VentaCodTipGuiaRemision(venta.codTipGuiaRemision),
-      new VentaNroGuiaRemision(venta.nroGuiaRemision),
-      new VentaCodTipDocRef(venta.codTipDocRef),
-      new VentaNroDocRef(venta.nroDocRef),
-      new VentaCodTipDocAnticipo(venta.codTipDocAnticipo), //02 fv, 03 bv emitida x anticipo. catalogo12
-      new VentaSerieDocAnticipo(venta.serieDocAnticipo),
-      new VentaNroDocAnticipo(venta.nroDocAnticipo),
-      new VentaCodTipDocCliAnticipo(venta.codTipDocCliAnticipo), //catalogo06
-      new VentaImporteAnticipo(venta.importeAnticipo),
-      venta.detalles.map(
+      new VentaCodEstablecimientoEmisor(venta.codEstablecimientoEmisor),
+      new VentaCliente(
+        venta.cliente.tipDoc,
+        venta.cliente.nroDoc,
+        venta.cliente.nomComercial,
+        venta.cliente.razonSocial,
+        venta.cliente.codPais,
+        venta.cliente.ubigeo,
+        venta.cliente.direccion,
+        venta.cliente.email,
+        venta.cliente.phone
+      ),
+      new VentaDatosTransporteCarga(
+        venta.datosTransporteCarga.ubigeoOrigen,
+        venta.datosTransporteCarga.direccionOrigen,
+        venta.datosTransporteCarga.ubigeo_destino,
+        venta.datosTransporteCarga.direccionDestino,
+        venta.datosTransporteCarga.valorRefServicioTransporte,
+        venta.datosTransporteCarga.valorReferencialCargaEfectiva,
+        venta.datosTransporteCarga.valorReferencialCargaUtil,
+        venta.datosTransporteCarga.detalleViaje
+      ),
+      venta.anticipos.map(
+        (c) => new VentaAnticipo(c.codTipoDoc, c.serie, c.numero, c.total)
+      ),
+      new VentaTotales(
+        venta.totales.exportacion,
+        venta.totales.gravadas,
+        venta.totales.inafectas,
+        venta.totales.exoneradas,
+        venta.totales.gratuitas,
+        venta.totales.Otros,
+        venta.totales.tax,
+        venta.totales.venta,
+        venta.totales.anticipos,
+        venta.totales.retencion,
+        venta.totales.codRetencion,
+        venta.totales.descuentos
+      ),
+      new VentaDetraccion(
+        venta.detraccion.codigo,
+        venta.detraccion.porcentaje,
+        venta.detraccion.monto,
+        venta.detraccion.codMetodoPago,
+        venta.detraccion.cuentaBancaria,
+        venta.detraccion.NombreCuentaBancaria
+      ),
+      new VentaTerminosPago(
+        venta.terminosPago.descripcion,
+        venta.terminosPago.tipo
+      ),
+      venta.cuotasCredito.map(
+        (c) => new VentaCuotasCredito(c.cuota, c.fechaPago, c.importe)
+      ),
+      new VentaObservaciones(venta.observaciones),
+      venta.items.map(
         (c) =>
-          new VentaDetalles(
+          new VentaItem(
             c.item,
-            c.codProducto,
-            c.codProductoSunat,
-            c.nombrePro,
             c.unidad,
+            c.codigo,
+            c.descripcion,
+            c.codigoProductoSunat,
+            c.codigoProductoGsl,
             c.cantidad,
-            c.codTipPrecio,
-            c.precioSugerido,
             c.valorUnitario,
-            c.subTotal,
-            c.ChargeIndicator,
-            c.codDescuento,
-            c.factorDescuento,
-            c.descuento,
-            c.valorVenta,
-            c.codTributo,
-            c.nombreTributo,
-            c.catImpuestos,
-            c.codInterTributo,
-            c.codTipoAfectacionIgv,
-            c.factorIgv,
-            c.igv,
-            c.indIgv,
-            c.aplicaICBPER,
-            c.factorICBPER,
-            c.importeICBPER,
-            c.precio,
-            c.codTipSistemaIsc,
-            c.factorIsc,
-            c.isc,
+            c.precioUnitario,
+            c.tipoTax,
+            c.totalBaseTax,
+            c.totalTax,
             c.total
           )
       )

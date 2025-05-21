@@ -42,221 +42,163 @@ export class ExpressVentaController {
     try {
       const {
         codEmpresa,
-        codTipDocVenta,
-        serieDocuVenta,
-        nroDocuVenta,
-        tipDocCli,
-        nroDocCli, //Ruc; dni; ce
-        nomComercialCli,
-        razonSocial,
-        direccion,
-        phone,
-        email,
+        codTipDoc,
+        serieDoc,
+        nroDoc,
+        CodTipOperacion,
         fecEmision,
-        fecVence,
+        fecVencimiento,
+        horaEmision,
         codMoneda,
-        simboloMoneda,
-        tipoCambio,
-        codTipOperacion,
-        cancelado,
-        formaPago,
-        envioAutoSunat,
-        observaciones,
-        agentePercepcion,
-        detraccion,
-        codProDetraccion,
-        factorDetraccion,
-        importeDetracion,
-        importeSubTotal,
-        importeDescuentosGlobales,
-        importeDescuentos,
-        importeOtros,
-        importeAnticipos,
-        importeValorVenta,
-        importeIsc,
-        importeIgv,
-        importeICBPER,
-        importePercepcion,
-        importeTotal,
-        importeCobrar,
-        importeTotalTexto,
+        factorTax,
+        envioAutoCli,
+        formaPAgo,
         nroOrdenCompra,
-        codTipGuiaRemision,
-        nroGuiaRemision,
-        codTipDocRef,
-        nroDocRef,
-        codTipDocAnticipo,
-        serieDocAnticipo,
-        nroDocAnticipo,
-        codTipDocCliAnticipo, //catalogo06
-        importeAnticipo,
-        detalles,
+        codEstablecimientoEmisor,
+        cliente,
+        datosTransporteCarga,
+        anticipos,
+        totales,
+        detraccion,
+        terminosPago,
+        cuotasCredito,
+        observaciones,
+        items,
       } = req.body as {
         codEmpresa: string;
-        codTipDocVenta: string;
-        serieDocuVenta: string;
-        nroDocuVenta: string;
-        tipDocCli: string;
-        nroDocCli: string; //Ruc; dni; ce
-        nomComercialCli: string;
-        razonSocial: string;
-        direccion: string;
-        phone: string;
-        email: string;
+        codTipDoc: string;
+        serieDoc: string;
+        nroDoc: string;
+        CodTipOperacion: string;
         fecEmision: string;
-        fecVence: string;
+        fecVencimiento: string;
+        horaEmision: string;
         codMoneda: string;
-        simboloMoneda: string;
-        tipoCambio: number;
-        codTipOperacion: string;
-        cancelado: boolean;
-        formaPago: string;
-        envioAutoSunat: boolean;
-        observaciones: string;
-        agentePercepcion: boolean;
-        detraccion: boolean;
-        codProDetraccion: string;
-        factorDetraccion: number;
-        importeDetracion: number;
-        importeSubTotal: number;
-        importeDescuentosGlobales: number;
-        importeDescuentos: number;
-        importeOtros: number;
-        importeAnticipos: number;
-        importeValorVenta: number;
-        importeIsc: number;
-        importeIgv: number;
-        importeICBPER: number;
-        importePercepcion: number;
-        importeTotal: number;
-        importeCobrar: number;
-        importeTotalTexto: string;
+        factorTax: number;
+        envioAutoCli: boolean;
+        formaPAgo: string;
         nroOrdenCompra: string;
-        codTipGuiaRemision: string;
-        nroGuiaRemision: string;
-        codTipDocRef: string;
-        nroDocRef: string;
-        codTipDocAnticipo: string;
-        serieDocAnticipo: string;
-        nroDocAnticipo: string;
-        codTipDocCliAnticipo: string; //catalogo06
-        importeAnticipo: number;
-        detalles: {
-          item: number;
-          codProducto: number;
-          codProductoSunat: string;
-          nombrePro: string;
-          unidad: string;
-          cantidad: string;
-          codTipPrecio: string; //01=onerosa; 02=no onerosa(gratuito)
-          precioSugerido: number; //valor unitario (sin descuentos ni impuestos)
-          valorUnitario: number; //valor unitario (sin descuentos ni impuestos)
-          subTotal: number;
-          ChargeIndicator: boolean; //false=descuento; true=cargo
-          codDescuento: string; //00=Descuentos que afectan el IGV/IVAP; 50=cargos
-          factorDescuento: number;
-          descuento: number;
-          valorVenta: number;
-          codTributo: string; //1000 IGV;   2000 ISC; 9999 otros
-          nombreTributo: string;
-          catImpuestos: string; //"E=Exonedado; O=Inafecto; S=IGV";
-          codInterTributo: string;
-          codTipoAfectacionIgv: string;
-          factorIgv: number;
-          igv: number;
-          indIgv: number; //condición si debe llevar o no igv
-          aplicaICBPER: boolean; // si; no
-          factorICBPER: string;
-          importeICBPER: number;
-          precio: number; //Precio Unitario
-          codTipSistemaIsc: string; //01 al valor; 02 al volumen; 03 al precio de venta al publico
-          factorIsc: number;
-          isc: number;
+        codEstablecimientoEmisor: string;
+        cliente: {
+          tipDoc: string;
+          nroDoc: string;
+          nomComercial: string;
+          razonSocial: string;
+          codPais: string;
+          ubigeo: string;
+          direccion: string;
+          email: string;
+          phone: string;
+        };
+        datosTransporteCarga: {
+          ubigeoOrigen: string;
+          direccionOrigen: string;
+          ubigeo_destino: string;
+          direccionDestino: string;
+          valorRefServicioTransporte: string;
+          valorReferencialCargaEfectiva: string;
+          valorReferencialCargaUtil: string;
+          detalleViaje: string;
+        };
+        anticipos: {
+          codTipoDoc: string;
+          serie: string;
+          numero: string;
           total: number;
+        }[];
+        totales: {
+          exportacion: number;
+          gravadas: number;
+          inafectas: number;
+          exoneradas: number;
+          gratuitas: number;
+          Otros: number;
+          tax: number;
+          venta: number;
+          anticipos: number;
+          retencion: number;
+          codRetencion: number;
+          descuentos: {
+            codigo: string;
+            descripcion: string;
+            porcentaje: number;
+            monto: number;
+            base: number;
+          };
+        };
+        detraccion: {
+          codigo: string;
+          porcentaje: number;
+          monto: number;
+          codMetodoPago: string;
+          cuentaBancaria: string;
+          NombreCuentaBancaria: string;
+        };
+        terminosPago: { descripcion: String; tipo: String };
+        cuotasCredito: { cuota: string; fechaPago: string; importe: number }[];
+        observaciones: string;
+        items: {
+          item: number;
+          unidad: string;
+          codigo: string;
+          descripcion: string;
+          codigoProductoSunat: string;
+          codigoProductoGsl: string;
+          cantidad: string;
+          valorUnitario: string;
+          precioUnitario: string;
+          tipoTax: string;
+          totalBaseTax: string;
+          totalTax: string;
+          total: string;
         }[];
       };
 
       await ServiceContainer.venta.create.run(
         codEmpresa,
-        codTipDocVenta,
-        serieDocuVenta,
-        nroDocuVenta,
-        tipDocCli,
-        nroDocCli, //Ruc; dni; ce
-        nomComercialCli,
-        razonSocial,
-        direccion,
-        phone,
-        email,
+        codTipDoc,
+        serieDoc,
+        nroDoc,
+        CodTipOperacion,
         fecEmision,
-        fecVence,
+        fecVencimiento,
+        horaEmision,
         codMoneda,
-        simboloMoneda,
-        tipoCambio,
-        codTipOperacion,
-        cancelado,
-        formaPago,
-        envioAutoSunat,
-        observaciones,
-        agentePercepcion,
-        detraccion,
-        codProDetraccion,
-        factorDetraccion,
-        importeDetracion,
-        importeSubTotal,
-        importeDescuentosGlobales,
-        importeDescuentos,
-        importeOtros,
-        importeAnticipos,
-        importeValorVenta,
-        importeIsc,
-        importeIgv,
-        importeICBPER,
-        importePercepcion,
-        importeTotal,
-        importeCobrar,
-        importeTotalTexto,
+        factorTax,
+        envioAutoCli,
+        formaPAgo,
         nroOrdenCompra,
-        codTipGuiaRemision,
-        nroGuiaRemision,
-        codTipDocRef,
-        nroDocRef,
-        codTipDocAnticipo,
-        serieDocAnticipo,
-        nroDocAnticipo,
-        codTipDocCliAnticipo, //catalogo06
-        importeAnticipo,
-        detalles.map((c) => ({
+        codEstablecimientoEmisor,
+        cliente,
+        datosTransporteCarga,
+        anticipos.map((c) => ({
+          codTipoDoc: c.codTipoDoc,
+          serie: c.serie,
+          numero: c.numero,
+          total: c.total,
+        })),
+        totales,
+        detraccion,
+        terminosPago,
+        cuotasCredito.map((c) => ({
+          cuota: c.cuota,
+          fechaPago: c.fechaPago,
+          importe: c.importe,
+        })),
+        observaciones,
+        items.map((c) => ({
           item: c.item,
-          codProducto: c.codProducto,
-          codProductoSunat: c.codProductoSunat,
-          nombrePro: c.nombrePro,
           unidad: c.unidad,
+          codigo: c.codigo,
+          descripcion: c.descripcion,
+          codigoProductoSunat: c.codigoProductoSunat,
+          codigoProductoGsl: c.codigoProductoGsl,
           cantidad: c.cantidad,
-          codTipPrecio: c.codTipPrecio, //01=onerosa; 02=no onerosa(gratuito)
-          precioSugerido: c.precioSugerido, //valor unitario (sin descuentos ni impuestos)
-          valorUnitario: c.valorUnitario, //valor unitario (sin descuentos ni impuestos)
-          subTotal: c.subTotal,
-          ChargeIndicator: c.ChargeIndicator, //false=descuento; true=cargo
-          codDescuento: c.codDescuento, //00=Descuentos que afectan el IGV/IVAP; 50=cargos
-          factorDescuento: c.factorDescuento,
-          descuento: c.descuento,
-          valorVenta: c.valorVenta,
-          codTributo: c.codTributo, //1000 IGV;   2000 ISC; 9999 otros
-          nombreTributo: c.nombreTributo,
-          catImpuestos: c.catImpuestos, //"E=Exonedado; O=Inafecto; S=IGV";
-          codInterTributo: c.codInterTributo,
-          codTipoAfectacionIgv: c.codTipoAfectacionIgv,
-          factorIgv: c.factorIgv,
-          igv: c.igv,
-          indIgv: c.indIgv, //condición si debe llevar o no igv
-          aplicaICBPER: c.aplicaICBPER, // si; no
-          factorICBPER: c.factorICBPER,
-          importeICBPER: c.importeICBPER,
-          precio: c.precio, //Precio Unitario
-          codTipSistemaIsc: c.codTipSistemaIsc, //01 al valor; 02 al volumen; 03 al precio de venta al publico
-          factorIsc: c.factorIsc,
-          isc: c.isc,
+          valorUnitario: c.valorUnitario,
+          precioUnitario: c.precioUnitario,
+          tipoTax: c.tipoTax,
+          totalBaseTax: c.totalBaseTax,
+          totalTax: c.totalTax,
           total: c.total,
         }))
       );
@@ -271,223 +213,166 @@ export class ExpressVentaController {
     try {
       const {
         codEmpresa,
-        codTipDocVenta,
-        serieDocuVenta,
-        nroDocuVenta,
-        tipDocCli,
-        nroDocCli, //Ruc; dni; ce
-        nomComercialCli,
-        razonSocial,
-        direccion,
-        phone,
-        email,
+        codTipDoc,
+        serieDoc,
+        nroDoc,
+        CodTipOperacion,
         fecEmision,
-        fecVence,
+        fecVencimiento,
+        horaEmision,
         codMoneda,
-        simboloMoneda,
-        tipoCambio,
-        codTipOperacion,
-        cancelado,
-        formaPago,
-        envioAutoSunat,
-        observaciones,
-        agentePercepcion,
-        detraccion,
-        codProDetraccion,
-        factorDetraccion,
-        importeDetracion,
-        importeSubTotal,
-        importeDescuentosGlobales,
-        importeDescuentos,
-        importeOtros,
-        importeAnticipos,
-        importeValorVenta,
-        importeIsc,
-        importeIgv,
-        importeICBPER,
-        importePercepcion,
-        importeTotal,
-        importeCobrar,
-        importeTotalTexto,
+        factorTax,
+        envioAutoCli,
+        formaPAgo,
         nroOrdenCompra,
-        codTipGuiaRemision,
-        nroGuiaRemision,
-        codTipDocRef,
-        nroDocRef,
-        codTipDocAnticipo,
-        serieDocAnticipo,
-        nroDocAnticipo,
-        codTipDocCliAnticipo, //catalogo06
-        importeAnticipo,
-        detalles,
+        codEstablecimientoEmisor,
+        cliente,
+        datosTransporteCarga,
+        anticipos,
+        totales,
+        detraccion,
+        terminosPago,
+        cuotasCredito,
+        observaciones,
+        items,
       } = req.body as {
         codEmpresa: string;
-        codTipDocVenta: string;
-        serieDocuVenta: string;
-        nroDocuVenta: string;
-        tipDocCli: string;
-        nroDocCli: string; //Ruc; dni; ce
-        nomComercialCli: string;
-        razonSocial: string;
-        direccion: string;
-        phone: string;
-        email: string;
+        codTipDoc: string;
+        serieDoc: string;
+        nroDoc: string;
+        CodTipOperacion: string;
         fecEmision: string;
-        fecVence: string;
+        fecVencimiento: string;
+        horaEmision: string;
         codMoneda: string;
-        simboloMoneda: string;
-        tipoCambio: number;
-        codTipOperacion: string;
-        cancelado: boolean;
-        formaPago: string;
-        envioAutoSunat: boolean;
-        observaciones: string;
-        agentePercepcion: boolean;
-        detraccion: boolean;
-        codProDetraccion: string;
-        factorDetraccion: number;
-        importeDetracion: number;
-        importeSubTotal: number;
-        importeDescuentosGlobales: number;
-        importeDescuentos: number;
-        importeOtros: number;
-        importeAnticipos: number;
-        importeValorVenta: number;
-        importeIsc: number;
-        importeIgv: number;
-        importeICBPER: number;
-        importePercepcion: number;
-        importeTotal: number;
-        importeCobrar: number;
-        importeTotalTexto: string;
+        factorTax: number;
+        envioAutoCli: boolean;
+        formaPAgo: string;
         nroOrdenCompra: string;
-        codTipGuiaRemision: string;
-        nroGuiaRemision: string;
-        codTipDocRef: string;
-        nroDocRef: string;
-        codTipDocAnticipo: string;
-        serieDocAnticipo: string;
-        nroDocAnticipo: string;
-        codTipDocCliAnticipo: string; //catalogo06
-        importeAnticipo: number;
-        detalles: {
-          item: number;
-          codProducto: number;
-          codProductoSunat: string;
-          nombrePro: string;
-          unidad: string;
-          cantidad: string;
-          codTipPrecio: string; //01=onerosa; 02=no onerosa(gratuito)
-          precioSugerido: number; //valor unitario (sin descuentos ni impuestos)
-          valorUnitario: number; //valor unitario (sin descuentos ni impuestos)
-          subTotal: number;
-          ChargeIndicator: boolean; //false=descuento; true=cargo
-          codDescuento: string; //00=Descuentos que afectan el IGV/IVAP; 50=cargos
-          factorDescuento: number;
-          descuento: number;
-          valorVenta: number;
-          codTributo: string; //1000 IGV;   2000 ISC; 9999 otros
-          nombreTributo: string;
-          catImpuestos: string; //"E=Exonedado; O=Inafecto; S=IGV";
-          codInterTributo: string;
-          codTipoAfectacionIgv: string;
-          factorIgv: number;
-          igv: number;
-          indIgv: number; //condición si debe llevar o no igv
-          aplicaICBPER: boolean; // si; no
-          factorICBPER: string;
-          importeICBPER: number;
-          precio: number; //Precio Unitario
-          codTipSistemaIsc: string; //01 al valor; 02 al volumen; 03 al precio de venta al publico
-          factorIsc: number;
-          isc: number;
+        codEstablecimientoEmisor: string;
+        cliente: {
+          tipDoc: string;
+          nroDoc: string;
+          nomComercial: string;
+          razonSocial: string;
+          codPais: string;
+          ubigeo: string;
+          direccion: string;
+          email: string;
+          phone: string;
+        };
+        datosTransporteCarga: {
+          ubigeoOrigen: string;
+          direccionOrigen: string;
+          ubigeo_destino: string;
+          direccionDestino: string;
+          valorRefServicioTransporte: string;
+          valorReferencialCargaEfectiva: string;
+          valorReferencialCargaUtil: string;
+          detalleViaje: string;
+        };
+        anticipos: {
+          codTipoDoc: string;
+          serie: string;
+          numero: string;
           total: number;
+        }[];
+        totales: {
+          exportacion: number;
+          gravadas: number;
+          inafectas: number;
+          exoneradas: number;
+          gratuitas: number;
+          Otros: number;
+          tax: number;
+          venta: number;
+          anticipos: number;
+          retencion: number;
+          codRetencion: number;
+          descuentos: {
+            codigo: string;
+            descripcion: string;
+            porcentaje: number;
+            monto: number;
+            base: number;
+          };
+        };
+        detraccion: {
+          codigo: string;
+          porcentaje: number;
+          monto: number;
+          codMetodoPago: string;
+          cuentaBancaria: string;
+          NombreCuentaBancaria: string;
+        };
+        terminosPago: { descripcion: String; tipo: String };
+        cuotasCredito: { cuota: string; fechaPago: string; importe: number }[];
+        observaciones: string;
+        items: {
+          item: number;
+          unidad: string;
+          codigo: string;
+          descripcion: string;
+          codigoProductoSunat: string;
+          codigoProductoGsl: string;
+          cantidad: string;
+          valorUnitario: string;
+          precioUnitario: string;
+          tipoTax: string;
+          totalBaseTax: string;
+          totalTax: string;
+          total: string;
         }[];
       };
       await ServiceContainer.venta.update.run(
         codEmpresa,
-        codTipDocVenta,
-        serieDocuVenta,
-        nroDocuVenta,
-        tipDocCli,
-        nroDocCli, //Ruc; dni; ce
-        nomComercialCli,
-        razonSocial,
-        direccion,
-        phone,
-        email,
+        codTipDoc,
+        serieDoc,
+        nroDoc,
+        CodTipOperacion,
         fecEmision,
-        fecVence,
+        fecVencimiento,
+        horaEmision,
         codMoneda,
-        simboloMoneda,
-        tipoCambio,
-        codTipOperacion,
-        cancelado,
-        formaPago,
-        envioAutoSunat,
-        observaciones,
-        agentePercepcion,
-        detraccion,
-        codProDetraccion,
-        factorDetraccion,
-        importeDetracion,
-        importeSubTotal,
-        importeDescuentosGlobales,
-        importeDescuentos,
-        importeOtros,
-        importeAnticipos,
-        importeValorVenta,
-        importeIsc,
-        importeIgv,
-        importeICBPER,
-        importePercepcion,
-        importeTotal,
-        importeCobrar,
-        importeTotalTexto,
+        factorTax,
+        envioAutoCli,
+        formaPAgo,
         nroOrdenCompra,
-        codTipGuiaRemision,
-        nroGuiaRemision,
-        codTipDocRef,
-        nroDocRef,
-        codTipDocAnticipo,
-        serieDocAnticipo,
-        nroDocAnticipo,
-        codTipDocCliAnticipo, //catalogo06
-        importeAnticipo,
-        detalles.map((c) => ({
+        codEstablecimientoEmisor,
+        cliente,
+        datosTransporteCarga,
+        anticipos.map((c) => ({
+          codTipoDoc: c.codTipoDoc,
+          serie: c.serie,
+          numero: c.numero,
+          total: c.total,
+        })),
+        totales,
+        detraccion,
+        terminosPago,
+        cuotasCredito.map((c) => ({
+          cuota: c.cuota,
+          fechaPago: c.fechaPago,
+          importe: c.importe,
+        })),
+        observaciones,
+        items.map((c) => ({
           item: c.item,
-          codProducto: c.codProducto,
-          codProductoSunat: c.codProductoSunat,
-          nombrePro: c.nombrePro,
           unidad: c.unidad,
+          codigo: c.codigo,
+          descripcion: c.descripcion,
+          codigoProductoSunat: c.codigoProductoSunat,
+          codigoProductoGsl: c.codigoProductoGsl,
           cantidad: c.cantidad,
-          codTipPrecio: c.codTipPrecio, //01=onerosa; 02=no onerosa(gratuito)
-          precioSugerido: c.precioSugerido, //valor unitario (sin descuentos ni impuestos)
-          valorUnitario: c.valorUnitario, //valor unitario (sin descuentos ni impuestos)
-          subTotal: c.subTotal,
-          ChargeIndicator: c.ChargeIndicator, //false=descuento; true=cargo
-          codDescuento: c.codDescuento, //00=Descuentos que afectan el IGV/IVAP; 50=cargos
-          factorDescuento: c.factorDescuento,
-          descuento: c.descuento,
-          valorVenta: c.valorVenta,
-          codTributo: c.codTributo, //1000 IGV;   2000 ISC; 9999 otros
-          nombreTributo: c.nombreTributo,
-          catImpuestos: c.catImpuestos, //"E=Exonedado; O=Inafecto; S=IGV";
-          codInterTributo: c.codInterTributo,
-          codTipoAfectacionIgv: c.codTipoAfectacionIgv,
-          factorIgv: c.factorIgv,
-          igv: c.igv,
-          indIgv: c.indIgv, //condición si debe llevar o no igv
-          aplicaICBPER: c.aplicaICBPER, // si; no
-          factorICBPER: c.factorICBPER,
-          importeICBPER: c.importeICBPER,
-          precio: c.precio, //Precio Unitario
-          codTipSistemaIsc: c.codTipSistemaIsc, //01 al valor; 02 al volumen; 03 al precio de venta al publico
-          factorIsc: c.factorIsc,
-          isc: c.isc,
+          valorUnitario: c.valorUnitario,
+          precioUnitario: c.precioUnitario,
+          tipoTax: c.tipoTax,
+          totalBaseTax: c.totalBaseTax,
+          totalTax: c.totalTax,
           total: c.total,
         }))
       );
+
       return res.status(201).send();
     } catch (error) {
       next(error);
