@@ -1,10 +1,10 @@
-import { StrictMode } from "react"; 
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import PayView from "./ui/pages/PayView.tsx";
+import VentaView from "./ui/pages/VentaView.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <PayView />
+    <VentaView />
   </StrictMode>
 );
